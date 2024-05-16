@@ -1,2 +1,39 @@
-# mobile-payments-sdk-ios
-Repo to host the iOS Mobile Payments SDK 
+[![CocoaPods](https://img.shields.io/cocoapods/v/SquareMobilePaymentsSDK)](https://github.com/CocoaPods/CocoaPods)
+
+# Square Mobile Payments SDK
+
+Build remarkable in-person experiences using Square's Mobile Payments SDK product now in beta. The Mobile Payments SDK has the advantage of being an API driven framework that allows for full customization as well as using the latest [V2/Payments](https://developer.squareup.com/explorer/square/payments-api/list-payments) API.
+
+
+## Installation
+
+### Cocoapods
+
+Install with [CocoaPods](http://cocoapods.org/) by adding the following to your Podfile:
+
+```
+use_frameworks!
+
+pod "SquareMobilePaymentsSDK", "~> 2.0.0.beta1"
+
+# Optionally include MockReaderUI if you wish to simulate a physical reader when one is not present.
+# This feature is only available when provided a sandbox application id.
+pod "MockReaderUI", "~> 2.0.0.beta1", configurations: ['Debug']
+```
+_Note that MockReaderUI framework **requires** that `SquareMobilePaymentsSDK` framework to also be present in podfile_
+
+#### Add build phase to setup the SquareMobilePaymentsSDK framework ####
+
+On your application targets’ Build Phases settings tab, click the + icon and choose New Run Script Phase. Create a Run Script in which you specify your shell (ex: /bin/sh), add the following contents to the script area below the shell:
+```
+SETUP_SCRIPT=${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}"/SquareMobilePaymentsSDK.framework/setup"
+if [ -f "$SETUP_SCRIPT" ]; then
+  "$SETUP_SCRIPT"
+fi
+```
+
+## Documentation Links
+* [MobilePaymentsSDK Overview](https://developer.squareup.com/docs/mobile-payments-sdk)
+* iOS Tech Reference
+	* [MobilePaymentsSDK Framework](https://developer.squareup.com/docs/sdk/mobile-payments/ios)
+
