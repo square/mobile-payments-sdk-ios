@@ -1,4 +1,5 @@
 [![CocoaPods](https://img.shields.io/cocoapods/v/SquareMobilePaymentsSDK)](https://github.com/CocoaPods/CocoaPods)
+[![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-4BC51D.svg?style=flat)](https://github.com/apple/swift-package-manager)
 
 # Square Mobile Payments SDK
 
@@ -6,6 +7,20 @@ Build remarkable in-person experiences using Square's Mobile Payments SDK produc
 
 
 ## Installation
+
+### Swift Package Manager
+
+To install the `SquareMobilePaymentsSDK` into your Xcode project, follow these steps:
+
+1. Select `File > Add Package Dependencies...`.
+2. Enter the repository URL: `https://github.com/square/mobile-payments-sdk-ios`.
+3. Select the `Exact Version` dependency rule and specify the version as `2.0.0-beta1`.
+4. Ensure the `SquareMobilePaymentsSDK` product is added to your target.
+
+Optionally, you can also add the `MockReaderUI` product to your target to simulate a physical reader when one is not present in a sandbox environment.
+
+> [!WARNING]  
+> Please note that the `MockReaderUI` product should only be used in debug configurations and is not to be included in the release version of your application.
 
 ### Cocoapods
 
