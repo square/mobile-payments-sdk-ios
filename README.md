@@ -52,3 +52,5 @@ fi
 * iOS Tech Reference
 	* [MobilePaymentsSDK Framework](https://developer.squareup.com/docs/sdk/mobile-payments/ios)
 
+If you need more assistance, contact [Developer and App Marketplace Support](https://squareup.com/help/us/en/contact?panel=BF53A9C8EF68) or ask for help in the [Developer Forums](https://developer.squareup.com/forums/).
+
