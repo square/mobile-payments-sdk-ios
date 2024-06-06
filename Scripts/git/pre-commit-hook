@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Run the Ruby validation script
+ruby Scripts/git/pre-commit-validator.rb
+
+# Capture the exit status of the Ruby script
+status=$?
+
+# If the validation script fails (non-zero exit status), abort the commit
+if [ $status -ne 0 ]; then
+  exit 1
+fi
+
+# Otherwise, allow the commit to proceed
+exit 0
