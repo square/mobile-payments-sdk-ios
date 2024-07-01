@@ -13,10 +13,17 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Set up Ruby
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2.2' # Specify the Ruby version you need
+          # Uses version specified in .ruby_version
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - name: Install Bundler
+        run: gem install bundler
+
+      - name: Install Gems
+        run: bundle install
 
       - name: Run Pre-Commit Validator
         run: |
@@ -24,4 +31,4 @@ jobs:
           chmod +x Scripts/git/pre-commit-validator.rb
 
           # Run the validation script
-          ./Scripts/git/pre-commit-validator.rb
+          bundle exec ruby Scripts/git/pre-commit-validator.rb
