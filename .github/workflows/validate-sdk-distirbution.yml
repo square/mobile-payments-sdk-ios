@@ -1,0 +1,27 @@
+name: Validate SDK Distribution
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2.2' # Specify the Ruby version you need
+
+      - name: Run Pre-Commit Validator
+        run: |
+          # Make sure the script is executable
+          chmod +x Scripts/git/pre-commit-validator.rb
+
+          # Run the validation script
+          ./Scripts/git/pre-commit-validator.rb

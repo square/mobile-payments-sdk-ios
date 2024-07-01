@@ -52,7 +52,7 @@ class Validator
 
   def self.validate_spm_package
     puts "Validating SPM Package..."
-    command = "swift package describe"
+    command = "swift package resolve"
     _stdout, stderr = CommandExecutor.execute(command)
     stderr.scan(/^(\w+)/).flatten
     # It is a known issue that SPM parser errors on binaryTargets. If it is the only error, then proceed as pass
