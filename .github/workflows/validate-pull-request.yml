@@ -1,4 +1,5 @@
-name: Validate SDK Distribution
+name: MPSDK PR Validation
+run-name: Validating PR Changes
 
 on:
   pull_request:
@@ -7,6 +8,7 @@ on:
 
 jobs:
   validate:
+    name: Validating SDK Repo Contents
     runs-on: macos-latest
 
     steps:
@@ -16,13 +18,12 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          # Uses version specified in .ruby_version
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
-      - name: Run Pre-Commit Validator
+      - name: Run Pull Request Validator
         run: |
           # Make sure the script is executable
-          chmod +x Scripts/git/pre-commit-validator.rb
+          chmod +x Scripts/git/pull-request-validator.rb
 
           # Run the validation script
-          ruby Scripts/git/pre-commit-validator.rb
+          ruby Scripts/git/pull-request-validator.rb

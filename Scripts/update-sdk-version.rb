@@ -1,9 +1,6 @@
 require_relative 'sdk_utilities'
 require_relative 'sdk_constants'
 
-# Install Pre-Commit Hook
-HookInstaller.install_pre_commit_hook
-
 template_builder = TemplateBuilder.new(
 	SquareMobilePaymentsSDK::VERSION,
 	SquareMobilePaymentsSDK::COMMIT_SHA,
