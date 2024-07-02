@@ -1,4 +1,4 @@
-run-name: Validating PR Changes
+name: MPSDK Pull Request Validator
 
 on:
   pull_request:
