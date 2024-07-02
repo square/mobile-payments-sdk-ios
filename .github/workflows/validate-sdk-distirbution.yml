@@ -25,4 +25,4 @@ jobs:
           chmod +x Scripts/git/pre-commit-validator.rb
 
           # Run the validation script
-          bundle exec ruby Scripts/git/pre-commit-validator.rb
+          ruby Scripts/git/pre-commit-validator.rb
