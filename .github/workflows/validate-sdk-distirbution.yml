@@ -15,9 +15,6 @@ jobs:
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
-        with:
-          # Uses version specified in .ruby_version
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - name: Install Bundler
         run: gem install bundler
