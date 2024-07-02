@@ -1,4 +1,5 @@
 require 'erb'
+require 'fileutils'
 require 'open3'
 
 class TemplateBuilder
@@ -34,62 +35,17 @@ class CommandExecutor
   end
 end
 
-class Validator
-  def self.validate_podspecs
-    puts "Validating Podspecs..."
-    command = "pod spec lint"
-    stdout, _stderr = CommandExecutor.execute(command)
-    stdout.scan(/^(\w+)/).flatten
-    if stdout.include?("All the specs passed validation.")
-      puts "✅ All podspecs have passed validation"
-      return true
-    else
-      puts "❎ Podspecs could not be validated"
-      puts stdout
+class FileComparator
+  def self.compare(file1_path, file2_path)
+    unless File.exist?(file1_path) && File.exist?(file2_path)
+      puts "File at #{file1_path} or at #{file2_path} does not exist."
       return false
     end
-  end
 
-  def self.validate_spm_package
-    puts "Validating SPM Package..."
-    command = "swift package describe"
-    _stdout, stderr = CommandExecutor.execute(command)
-    stderr.scan(/^(\w+)/).flatten
-    # It is a known issue that SPM parser errors on binaryTargets. If it is the only error, then proceed as pass
-    if stderr.nil? || stderr.empty? || stderr.include?("error: unknown binary artifact file extension 'zip'")
-      puts "✅ SPM Package has passed validation"
-      return true
-    else
-      puts "❎ SPM Package could not be validated"
-      puts stderr
+    unless FileUtils.identical?(file1_path, file2_path)
       return false
     end
-  end
-end
 
-class HookInstaller
-  def self.install_pre_commit_hook
-    pre_commit_hook_path = './Scripts/git/pre-commit-hook'
-    destination_path = '.git/hooks/pre-commit'
-
-    # Read the contents of the source file
-    begin
-      hook_content = File.read(pre_commit_hook_path)
-    rescue Errno::ENOENT => e
-      puts "❎ Error reading source file: #{e.message}"
-      return
-    end
-
-    # Write the contents to the destination file
-    begin
-      File.open(destination_path, 'w') do |file|
-        file.write(hook_content)
-      end
-      # Make the hook script executable
-      File.chmod(0755, destination_path)
-      puts "✅ Pre-commit hook has been installed successfully."
-    rescue Errno::ENOENT, Errno::EACCES => e
-      puts "❎ Error writing to destination file: #{e.message}"
-    end
+    return true
   end
 end

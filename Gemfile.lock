@@ -8,8 +8,9 @@ GEM
     open3 (0.2.1)
 
 PLATFORMS
-  arm64-darwin-21
   arm64-darwin-22
+  arm64-darwin-23
+  ruby
 
 DEPENDENCIES
   erb
@@ -17,4 +18,4 @@ DEPENDENCIES
   open3
 
 BUNDLED WITH
-   2.3.21
+   2.5.5
