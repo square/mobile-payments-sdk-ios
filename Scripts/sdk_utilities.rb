@@ -38,7 +38,9 @@ class Validator
   def self.validate_podspecs
     puts "Validating Podspecs..."
     command = "pod spec lint"
-    stdout, _stderr = CommandExecutor.execute(command)
+    stdout, stderr = CommandExecutor.execute(command)
+    puts "STD OUT: #{stdout}"
+    puts "STD ERR: #{stderr}"
     stdout.scan(/^(\w+)/).flatten
     if stdout.include?("All the specs passed validation.")
       puts "✅ All podspecs have passed validation"
