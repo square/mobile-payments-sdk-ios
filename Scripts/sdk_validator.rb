@@ -13,7 +13,7 @@ class Validator
 
     # Validates output
     unless stdout.include?("All the specs passed validation.")
-      puts "❎ Podspecs could not be validated"
+      puts "❌ Podspecs could not be validated"
       puts stdout
       return false
     end
@@ -32,7 +32,7 @@ class Validator
 
     # Validates output of resolve does not have errors.
     unless stderr.nil? || stderr.empty?
-      puts "❎ SPM Package could not be validated"
+      puts "❌ SPM Package could not be validated"
       puts stderr
       return false
     end
@@ -45,7 +45,7 @@ class Validator
     # Validates SPM was able to resolve and extract the xcframeworks
     for package in packages_to_validate do
       unless File.directory?("./.build/artifacts/mobile-payments-sdk-ios/#{package}/#{package}.xcframework")
-        puts "❎ SPM was unable to resolve #{package}"
+        puts "❌ SPM was unable to resolve #{package}"
         FileUtils.rm_rf('.build')
         return false
       end
