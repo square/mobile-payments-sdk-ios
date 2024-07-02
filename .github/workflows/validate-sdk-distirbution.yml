@@ -15,15 +15,9 @@ jobs:
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
-
-      - name: Install Bundler
-        run: gem install bundler
-
-      - name: Install Gems
-        run: bundle install
-
-      - name: Check Installed Gems
-        run: bundle list
+        with:
+          # Uses version specified in .ruby_version
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - name: Run Pre-Commit Validator
         run: |
