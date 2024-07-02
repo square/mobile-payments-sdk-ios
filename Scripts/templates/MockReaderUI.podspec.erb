@@ -1,0 +1,18 @@
+Pod::Spec.new do |s|
+  s.name = 'MockReaderUI'
+  s.version = '<%= @version %>'
+  s.license = <%= @license %>
+  s.homepage = '<%= @homepage_url %>'
+  s.authors = '<%= @authors %>'
+  s.summary = 'Enables developers to build use mock readers for testing the MobilePaymentsSDK'
+
+  s.ios.deployment_target = '<%= @ios_deployment_target %>'
+
+  s.source ={ :git => "https://github.com/square/mobile-payments-sdk-ios.git" , :tag => "<%= @version %>" }
+
+  s.vendored_frameworks = 'MockReaderUI.xcframework'
+  s.prepare_command = <<-CMD
+                      unzip XCFrameworks/MockReaderUI_<%= @commit_sha %>.zip
+                      CMD
+
+end
