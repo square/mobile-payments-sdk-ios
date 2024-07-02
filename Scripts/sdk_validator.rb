@@ -82,7 +82,7 @@ class Validator
     for file in files_to_test do
       template_builder.build_and_write("./Scripts/templates/#{file}.erb", file, './tmp/')
       unless FileComparator.compare("./#{file}", "./tmp/#{file}")
-        puts "Output of #{file}.erb rendering does not match #{file_name}."
+        puts "Output of #{file}.erb rendering does not match #{file}."
         puts "Please ensure you are modifying the erb template and not the output file"
         FileUtils.rm_rf('tmp')
         return false
