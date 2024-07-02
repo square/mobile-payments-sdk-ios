@@ -12,11 +12,11 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "SquareMobilePaymentsSDK",
-            path: "XCFrameworks/SquareMobilePaymentsSDK_6432c60c8568.zip"
+            path: "XCFrameworks/SquareMobilePaymentsSDK_bad_commit.zip"
         ),
         .binaryTarget(
             name: "MockReaderUI",
-            path: "XCFrameworks/MockReaderUI_6432c60c8568.zip"
+            path: "XCFrameworks/MockReaderUI_bad_commit.zip"
         ),
     ]
 )

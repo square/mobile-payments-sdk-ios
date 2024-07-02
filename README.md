@@ -9,7 +9,7 @@ Learn what you can do with the Mobile Payments SDK [here](https://developer.squa
 
 ## Installation
 
-### 1. Add frameworks using SPM or CocoaPods Bad Change
+### 1. Add frameworks using SPM or CocoaPods
 
 #### Option A. Swift Package Manager
 

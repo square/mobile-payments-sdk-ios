@@ -14,7 +14,7 @@ class Validator
     # Validates output
     unless stdout.include?("All the specs passed validation.")
       puts "❎ Podspecs could not be validated"
-      puts stderr
+      puts stdout
       return false
     end
 

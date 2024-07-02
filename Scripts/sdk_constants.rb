@@ -1,6 +1,6 @@
 module SquareMobilePaymentsSDK
   VERSION = '2.0.0-beta1'
-  COMMIT_SHA = '6432c60c8568'
+  COMMIT_SHA = 'bad_commit'
   LICENSE_TYPE = 'Square Developer License'
   LICENSE_TEXT = <<-LICENSE
 Copyright (c) 2020-present, Square, Inc. All rights reserved.

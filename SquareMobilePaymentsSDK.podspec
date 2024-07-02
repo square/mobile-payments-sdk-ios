@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
 
   s.vendored_frameworks = 'SquareMobilePaymentsSDK.xcframework'
   s.prepare_command = <<-CMD
-                      unzip XCFrameworks/SquareMobilePaymentsSDK_6432c60c8568.zip
+                      unzip XCFrameworks/SquareMobilePaymentsSDK_bad_commit.zip
                       CMD
 
 end

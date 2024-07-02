@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
 
   s.vendored_frameworks = 'MockReaderUI.xcframework'
   s.prepare_command = <<-CMD
-                      unzip XCFrameworks/MockReaderUI_6432c60c8568.zip
+                      unzip XCFrameworks/MockReaderUI_bad_commit.zip
                       CMD
 
 end
