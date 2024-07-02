@@ -46,9 +46,12 @@ class Validator
     for package in packages_to_validate do
       unless File.directory?("./.build/artifacts/mobile-payments-sdk-ios/#{package}/#{package}.xcframework")
         puts "❎ SPM was unable to resolve #{package}"
+        FileUtils.rm_rf('.build')
         return false
       end
     end
+
+    FileUtils.rm_rf('.build')
 
     puts "✅ SPM package has passed validation"
     return true
@@ -81,9 +84,12 @@ class Validator
       unless FileComparator.compare("./#{file}", "./tmp/#{file}")
         puts "Output of #{file}.erb rendering does not match #{file_name}."
         puts "Please ensure you are modifying the erb template and not the output file"
+        FileUtils.rm_rf('tmp')
         return false
       end
     end
+
+    FileUtils.rm_rf('tmp')
 
     puts "✅ Template files have passed validation"
     return true

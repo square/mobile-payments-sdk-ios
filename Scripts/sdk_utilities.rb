@@ -15,16 +15,10 @@ class TemplateBuilder
   def build_and_write(template_path, file_name, output_dir)
     template = File.read(template_path)
     renderer = ERB.new(template)
-    result = renderer.result(get_binding)
+    result = renderer.result(binding)
     File.open("#{output_dir}#{file_name}", 'w+') do |file|
       file.write(result)
     end
-  end
-
-  private
-
-  def get_binding
-    binding
   end
 end
 
