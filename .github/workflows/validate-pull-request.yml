@@ -1,0 +1,30 @@
+name: MPSDK Pull Request Validator
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - name: Run Pull Request Validator
+        run: |
+          # Make sure the script is executable
+          chmod +x Scripts/git/pull-request-validator.rb
+
+          # Run the validation script
+          ruby Scripts/git/pull-request-validator.rb
