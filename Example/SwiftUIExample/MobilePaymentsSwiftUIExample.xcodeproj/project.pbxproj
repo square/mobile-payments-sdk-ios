@@ -370,6 +370,9 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Square uses Bluetooth to connect and communicate with Square readers and compatible accessories.\n";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Square needs to know where transactions take place to reduce risk and minimize payment disputes.\n";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Some Square readers use the microphone to communicate payment card data to your device.\n";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -403,6 +406,9 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Square uses Bluetooth to connect and communicate with Square readers and compatible accessories.\n";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Square needs to know where transactions take place to reduce risk and minimize payment disputes.\n";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Some Square readers use the microphone to communicate payment card data to your device.\n";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
