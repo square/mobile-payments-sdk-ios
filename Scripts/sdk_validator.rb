@@ -9,7 +9,6 @@ class Validator
     # Runs pod spec lint validation
     command = "pod spec lint"
     stdout, stderr = CommandExecutor.execute(command)
-    stdout.scan(/^(\w+)/).flatten
 
     # Validates output
     unless stdout.include?("All the specs passed validation.")
@@ -28,10 +27,10 @@ class Validator
     # Resolves all packages in Package.swift
     command = "swift package resolve"
     _stdout, stderr = CommandExecutor.execute(command)
-    stderr.scan(/^(\w+)/).flatten
+    any_errors = stderr.scan("error").flatten
 
     # Validates output of resolve does not have errors.
-    unless stderr.nil? || stderr.empty?
+    unless any_errors.nil? || any_errors.empty?
       puts "❌ SPM Package could not be validated"
       puts stderr
       return false
@@ -68,7 +67,8 @@ class Validator
       SquareMobilePaymentsSDK::LICENSE,
       SquareMobilePaymentsSDK::HOMEPAGE_URL,
       SquareMobilePaymentsSDK::AUTHORS,
-      SquareMobilePaymentsSDK::IOS_DEPLOYMENT_TARGET
+      SquareMobilePaymentsSDK::IOS_DEPLOYMENT_TARGET,
+      SquareMobilePaymentsSDK::CLOUDFRONT_DOMAIN
     )
 
     files_to_test = [
