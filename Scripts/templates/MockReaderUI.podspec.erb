@@ -8,7 +8,11 @@ Pod::Spec.new do |s|
 
   s.ios.deployment_target = '<%= @ios_deployment_target %>'
 
-  s.source ={ :http => "https://<%= @cloudfront_domain %>/mpsdk/<%= @version %>/MockReaderUI_<%= @commit_sha %>.zip" }
+  s.source ={ :git => "https://github.com/square/mobile-payments-sdk-ios.git" , :tag => "<%= @version %>" }
+
   s.vendored_frameworks = 'MockReaderUI.xcframework'
+  s.prepare_command = <<-CMD
+                      unzip XCFrameworks/MockReaderUI_<%= @commit_sha %>.zip
+                      CMD
 
 end
