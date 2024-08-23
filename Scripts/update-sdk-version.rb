@@ -7,8 +7,7 @@ template_builder = TemplateBuilder.new(
 	SquareMobilePaymentsSDK::LICENSE,
 	SquareMobilePaymentsSDK::HOMEPAGE_URL,
 	SquareMobilePaymentsSDK::AUTHORS,
-	SquareMobilePaymentsSDK::IOS_DEPLOYMENT_TARGET,
-	SquareMobilePaymentsSDK::CLOUDFRONT_DOMAIN
+	SquareMobilePaymentsSDK::IOS_DEPLOYMENT_TARGET
 )
 
 # Generate README
