@@ -1,6 +1,7 @@
 module SquareMobilePaymentsSDK
-  VERSION = '2.0.0-beta1'
-  COMMIT_SHA = '6432c60c8568'
+  VERSION = '2.0.0-beta3'
+  COMMIT_SHA = 'd86d59057def'
+  CLOUDFRONT_DOMAIN = 'd3eygymyzkbhx3.cloudfront.net'
   LICENSE_TYPE = 'Square Developer License'
   LICENSE_TEXT = <<-LICENSE
 Copyright (c) 2020-present, Square, Inc. All rights reserved.
