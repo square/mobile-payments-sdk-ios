@@ -1,10 +1,3 @@
-//
-//  HomeView.swift
-//  MobilePaymentsExample
-//
-//  Created by Brandon Jenniges on 6/11/24.
-//
-
 import MockReaderUI
 import SquareMobilePaymentsSDK
 import SwiftUI
@@ -108,6 +101,7 @@ struct HomeView: View {
             }
         )
         .buttonStyle(IconButton())
+        .disabled(isAuthorized)
     }
 
     // MARK: - Permissions Button
@@ -126,7 +120,7 @@ struct HomeView: View {
             isPresented: $presentingPermissionsView
         ) {
             // https://developer.squareup.com/docs/mobile-payments-sdk/ios#privacy-permissions
-            PermissionsView()
+            PermissionsView(viewModel: PermissionsViewModel())
         }
         .buttonStyle(IconButton())
     }

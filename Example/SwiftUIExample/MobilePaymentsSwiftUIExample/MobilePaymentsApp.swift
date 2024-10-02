@@ -1,10 +1,3 @@
-//
-//  MobilePaymentsExampleApp.swift
-//  MobilePaymentsExample
-//
-//  Created by Brandon Jenniges on 6/11/24.
-//
-
 import SwiftUI
 import SquareMobilePaymentsSDK
 

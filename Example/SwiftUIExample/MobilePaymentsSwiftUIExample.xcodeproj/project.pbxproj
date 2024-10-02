@@ -20,6 +20,7 @@
 		FB1E68E92C1CC5E8004DC0A9 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1E68E32C1CC5E8004DC0A9 /* Config.swift */; };
 		FB1E68EA2C1CC5E8004DC0A9 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1E68E52C1CC5E8004DC0A9 /* Preview Assets.xcassets */; };
 		FB1E68EB2C1CC5E8004DC0A9 /* MockMobilePaymentsSDK.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1E68E62C1CC5E8004DC0A9 /* MockMobilePaymentsSDK.swift */; };
+		FBA3341B2CAD99AE00CD889A /* PermissionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBA3341A2CAD99AE00CD889A /* PermissionsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		FB1E68E32C1CC5E8004DC0A9 /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		FB1E68E52C1CC5E8004DC0A9 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FB1E68E62C1CC5E8004DC0A9 /* MockMobilePaymentsSDK.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockMobilePaymentsSDK.swift; sourceTree = "<group>"; };
+		FBA3341A2CAD99AE00CD889A /* PermissionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 				FB1E68C82C1CC55C004DC0A9 /* HomeViewModel.swift */,
 				FB1E68C92C1CC55C004DC0A9 /* HomeView.swift */,
 				FB1E68CA2C1CC55C004DC0A9 /* PermissionsView.swift */,
+				FBA3341A2CAD99AE00CD889A /* PermissionsViewModel.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				FB1E68D32C1CC55C004DC0A9 /* MobilePaymentsSDKViewHolder.swift in Sources */,
 				FB1E68D62C1CC55C004DC0A9 /* HomeView.swift in Sources */,
 				FB1E68EB2C1CC5E8004DC0A9 /* MockMobilePaymentsSDK.swift in Sources */,
+				FBA3341B2CAD99AE00CD889A /* PermissionsViewModel.swift in Sources */,
 				FB1E68E92C1CC5E8004DC0A9 /* Config.swift in Sources */,
 				FB1E68D52C1CC55C004DC0A9 /* HomeViewModel.swift in Sources */,
 				FB1E68D72C1CC55C004DC0A9 /* PermissionsView.swift in Sources */,
