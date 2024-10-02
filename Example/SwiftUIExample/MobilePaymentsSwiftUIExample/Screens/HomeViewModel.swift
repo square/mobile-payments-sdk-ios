@@ -1,10 +1,3 @@
-//
-//  HomeViewModel.swift
-//  MobilePaymentsExample
-//
-//  Created by Brandon Jenniges on 6/12/24.
-//
-
 import MockReaderUI
 import SquareMobilePaymentsSDK
 

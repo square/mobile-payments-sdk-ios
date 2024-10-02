@@ -1,10 +1,3 @@
-//
-//  MobilePaymentsSDKViewHolder.swift
-//  MobilePaymentsExample
-//
-//  Created by Brandon Jenniges on 6/12/24.
-//
-
 import SwiftUI
 
 /// UIViewControllerRepresentable for usage of a UIViewController in the SquareMobilePaymentsSDK APIs that need a UIViewController

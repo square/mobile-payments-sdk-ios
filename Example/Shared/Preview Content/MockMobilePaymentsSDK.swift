@@ -1,10 +1,3 @@
-//
-//  MockMobilePaymentsSDK.swift
-//  MobilePaymentsExample
-//
-//  Created by Brandon Jenniges on 6/14/24.
-//
-
 import SquareMobilePaymentsSDK
 
 class MockMobilePaymentsSDK: NSObject, SDKManager {

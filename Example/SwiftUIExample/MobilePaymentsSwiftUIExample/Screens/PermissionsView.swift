@@ -1,16 +1,8 @@
-//
-//  PermissionsView.swift
-//  MobilePaymentsExample
-//
-//  Created by Brandon Jenniges on 6/11/24.
-//
-
-import AVFoundation
-import CoreBluetooth
-import CoreLocation
 import SwiftUI
 
 struct PermissionsView: View {
+
+    @ObservedObject var viewModel: PermissionsViewModel
 
     var body: some View {
         HStack {
@@ -57,30 +49,21 @@ struct PermissionsView: View {
         .background(.teal)
     }
 
+    // MARK: - Actions
+
     private func requestBluetooth() {
-        let _ = CBCentralManager()
+        viewModel.requestBluetooth()
     }
 
     private func requestLocation() {
-        switch CLLocationManager.authorizationStatus() {
-        case .notDetermined:
-            CLLocationManager().requestWhenInUseAuthorization()
-        case .restricted, .denied:
-            print("Show UI directing the user to the iOS Settings app")
-        case .authorizedAlways, .authorizedWhenInUse:
-            print("Location services have already been authorized.")
-        @unknown default:
-            fatalError()
-        }
+        viewModel.requestLocation()
     }
 
-    private func requestMicrophone() { 
-        AVCaptureDevice.requestAccess(for: .audio) { granted in
-            print("\(#function) - \(granted)")
-        }
+    private func requestMicrophone() {
+        viewModel.requestMicrophone()
     }
 }
 
 #Preview {
-    PermissionsView()
+    PermissionsView(viewModel: PermissionsViewModel())
 }

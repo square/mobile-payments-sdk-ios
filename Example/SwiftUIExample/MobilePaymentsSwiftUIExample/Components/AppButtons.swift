@@ -1,10 +1,3 @@
-//
-//  AppButtons.swift
-//  MobilePaymentsExample
-//
-//  Created by Brandon Jenniges on 6/11/24.
-//
-
 import SwiftUI
 
 struct AppButton: ButtonStyle {
@@ -22,12 +15,15 @@ struct AppButton: ButtonStyle {
 }
 
 struct IconButton: ButtonStyle {
+    @Environment(\.isEnabled) var isEnabled
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundStyle(.white)
+            .foregroundStyle(isEnabled ? .white : .white.opacity(0.3))
             .padding()
-            .background(.indigo)
+            .background(isEnabled ? .indigo : .blue.opacity(0.3))
             .clipShape(Circle())
+            .opacity(configuration.isPressed ? 0.7 : 1.0)
     }
 }
 
