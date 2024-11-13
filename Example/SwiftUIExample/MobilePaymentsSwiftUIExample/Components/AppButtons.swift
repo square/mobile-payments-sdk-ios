@@ -1,68 +1,117 @@
 import SwiftUI
 
-struct AppButton: ButtonStyle {
-    @Environment(\.isEnabled) var isEnabled
-
+struct HeaderButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding()
-            .background(isEnabled ? .indigo : .blue.opacity(0.3))
-            .foregroundStyle(isEnabled ? .white : .white.opacity(0.3))
-            .font(.title3)
-            .fontWeight(.bold)
-            .clipShape(Capsule())
+            .background(Color.Button.Header.background)
+            .foregroundStyle(Color.Button.Header.foreground)
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+            .font(.body.weight(.semibold))
+            .clipShape(.rect(cornerRadius: 6))
     }
 }
 
-struct IconButton: ButtonStyle {
+struct BuyButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) var isEnabled
-
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundStyle(isEnabled ? .white : .white.opacity(0.3))
-            .padding()
-            .background(isEnabled ? .indigo : .blue.opacity(0.3))
-            .clipShape(Circle())
-            .opacity(configuration.isPressed ? 0.7 : 1.0)
+            .frame(maxWidth: .infinity)
+            .padding(16)
+            .background(isEnabled ? Color.Button.Buy.enabledBackground : Color.Button.Buy.disabledBackground)
+            .foregroundStyle(isEnabled ? Color.Button.Buy.enabledForeground : Color.Button.Buy.disabledForeground)
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+            .clipShape(.rect(cornerRadius: 6))
+    }
+}
+
+struct AuthorizationButtonStyle: ButtonStyle {
+    var isAuthorized: Bool
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(maxWidth: .infinity)
+            .padding(16)
+            .background(isAuthorized ? Color.Button.Authorization.authorizedBackground : Color.Button.Authorization.notAuthorizedBackground)
+            .foregroundStyle(isAuthorized ? Color.Button.Authorization.authorizedForeground : Color.Button.Authorization.notAuthorizedForeground)
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+            .clipShape(.rect(cornerRadius: 6))
+    }
+}
+
+struct DismissButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(width: 24, height: 24)
+            .padding(12)
+            .background(Color.Button.Dismiss.background)
+            .foregroundStyle(Color.Button.Dismiss.foreground)
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+            .clipShape(.rect(cornerRadius: 6))
     }
 }
 
 #Preview {
     VStack {
-        VStack {
-            Text("AppButton")
-            Button(
-                action: {},
-                label: { Text("Enabled Button") }
-            )
-            Button(
-                action: {},
-                label: { Text("Disabled Button") }
-            )
-            .disabled(true)
-        }
+        Button(
+            action: {},
+            label: { Text("Header Button") }
+        )
         .padding()
-        .buttonStyle(AppButton())
-
-        VStack {
-            Text("IconButton")
-            Button(
-                action: {},
-                label: {
-                    Image(
-                        systemName: "person.crop.circle.fill"
-                    )
-                    .resizable()
-                    .frame(width: 44, height: 44)
-                }
-            )
-        }
+        .buttonStyle(HeaderButtonStyle())
+        
+        Button(
+            action: {},
+            label: {
+                Image(systemName: "xmark")
+                    .font(.body)
+                    .fontWeight(.medium)
+            }
+        )
         .padding()
-        .buttonStyle(IconButton())
+        .buttonStyle(DismissButton())
+        
+        Button(
+            action: {},
+            label: { Text("Enabled Buy Button") }
+        )
+        .padding()
+        .buttonStyle(BuyButtonStyle())
+        
+        Button(
+            action: {},
+            label: { Text("Disabled Buy Button") }
+        )
+        .padding()
+        .disabled(true)
+        .buttonStyle(BuyButtonStyle())
+        
+        Button(
+            action: {},
+            label: { Text("Sign In") }
+        )
+        .padding()
+        .buttonStyle(AuthorizationButtonStyle(isAuthorized: false))
+        
+        Button(
+            action: {},
+            label: { Text("Sign out") }
+        )
+        .padding()
+        .buttonStyle(AuthorizationButtonStyle(isAuthorized: true))
+        
+        Button(
+            action: {},
+            label: {
+                ProgressView()
+                    .tint(.black)
+            }
+        )
+        .padding()
+        .buttonStyle(AuthorizationButtonStyle(isAuthorized: false))
     }
-    .foregroundStyle(.white)
-    .font(.title)
-    .fontWeight(.bold)
     .padding()
-    .background(Color.teal)
+    .background(Color.white)
+    .font(.headline)
 }

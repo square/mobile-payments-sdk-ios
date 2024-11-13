@@ -9,10 +9,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
-        guard let applicationId = Config.squareApplicationID else {
-            fatalError("Replace the values in Config.swift with values from your Square account")
-        }
-        MobilePaymentsSDK.initialize(squareApplicationID: applicationId)
+        MobilePaymentsSDK.initialize(squareApplicationID: Config.squareApplicationID)
         self.mobilePaymentSDK = MobilePaymentsSDK.shared
         return true
     }
