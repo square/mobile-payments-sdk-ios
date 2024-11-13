@@ -3,10 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D05023662CE52A5B005FA05C /* MockReaderUI in Frameworks */ = {isa = PBXBuildFile; productRef = D05023652CE52A5B005FA05C /* MockReaderUI */; };
+		D05023682CE52A5B005FA05C /* SquareMobilePaymentsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D05023672CE52A5B005FA05C /* SquareMobilePaymentsSDK */; };
+		D09D322D2CE442F9002DB265 /* Payment+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09D322C2CE442F9002DB265 /* Payment+Extensions.swift */; };
+		D09D322F2CE445C4002DB265 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09D322E2CE445C4002DB265 /* String+Extensions.swift */; };
+		D09D32322CE4704E002DB265 /* IdempotencyKeyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09D32312CE4704E002DB265 /* IdempotencyKeyStorage.swift */; };
+		D09D32342CE50F8E002DB265 /* Config+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09D32332CE50F8E002DB265 /* Config+Extensions.swift */; };
+		D0D5BB652CDD75F20054771D /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D5BB642CDD75F20054771D /* Color+Extensions.swift */; };
+		D0F1F9242CDEA4DC00E00BB6 /* PermissionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F1F9232CDEA4DC00E00BB6 /* PermissionRow.swift */; };
 		FB1E68D22C1CC55C004DC0A9 /* MobilePaymentsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1E68C32C1CC55C004DC0A9 /* MobilePaymentsApp.swift */; };
 		FB1E68D32C1CC55C004DC0A9 /* MobilePaymentsSDKViewHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1E68C52C1CC55C004DC0A9 /* MobilePaymentsSDKViewHolder.swift */; };
 		FB1E68D42C1CC55C004DC0A9 /* AppButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1E68C62C1CC55C004DC0A9 /* AppButtons.swift */; };
@@ -24,6 +32,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D09D322C2CE442F9002DB265 /* Payment+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Payment+Extensions.swift"; sourceTree = "<group>"; };
+		D09D322E2CE445C4002DB265 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		D09D32312CE4704E002DB265 /* IdempotencyKeyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdempotencyKeyStorage.swift; sourceTree = "<group>"; };
+		D09D32332CE50F8E002DB265 /* Config+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config+Extensions.swift"; sourceTree = "<group>"; };
+		D0D5BB642CDD75F20054771D /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		D0F1F9232CDEA4DC00E00BB6 /* PermissionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionRow.swift; sourceTree = "<group>"; };
 		FB1E68AD2C1CC50A004DC0A9 /* MobilePaymentsSwiftUIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobilePaymentsSwiftUIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB1E68C32C1CC55C004DC0A9 /* MobilePaymentsApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MobilePaymentsApp.swift; sourceTree = "<group>"; };
 		FB1E68C52C1CC55C004DC0A9 /* MobilePaymentsSDKViewHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MobilePaymentsSDKViewHolder.swift; sourceTree = "<group>"; };
@@ -46,12 +60,52 @@
 			files = (
 				FB1E68DC2C1CC58C004DC0A9 /* MockReaderUI in Frameworks */,
 				FB1E68DE2C1CC58C004DC0A9 /* SquareMobilePaymentsSDK in Frameworks */,
+				D05023662CE52A5B005FA05C /* MockReaderUI in Frameworks */,
+				D05023682CE52A5B005FA05C /* SquareMobilePaymentsSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D09D32302CE4703B002DB265 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				D09D32312CE4704E002DB265 /* IdempotencyKeyStorage.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		D0D5BB632CDD75DE0054771D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D0D5BB642CDD75F20054771D /* Color+Extensions.swift */,
+				D09D322C2CE442F9002DB265 /* Payment+Extensions.swift */,
+				D09D322E2CE445C4002DB265 /* String+Extensions.swift */,
+				D09D32332CE50F8E002DB265 /* Config+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D0F1F9252CDEB44200E00BB6 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				FB1E68C82C1CC55C004DC0A9 /* HomeViewModel.swift */,
+				FB1E68C92C1CC55C004DC0A9 /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		D0F1F9262CDEB44700E00BB6 /* Permissions */ = {
+			isa = PBXGroup;
+			children = (
+				FB1E68CA2C1CC55C004DC0A9 /* PermissionsView.swift */,
+				D0F1F9232CDEA4DC00E00BB6 /* PermissionRow.swift */,
+				FBA3341A2CAD99AE00CD889A /* PermissionsViewModel.swift */,
+			);
+			path = Permissions;
+			sourceTree = "<group>";
+		};
 		FB1E68A42C1CC50A004DC0A9 = {
 			isa = PBXGroup;
 			children = (
@@ -71,6 +125,8 @@
 		FB1E68AF2C1CC50A004DC0A9 /* MobilePaymentsSwiftUIExample */ = {
 			isa = PBXGroup;
 			children = (
+				D09D32302CE4703B002DB265 /* Helpers */,
+				D0D5BB632CDD75DE0054771D /* Extensions */,
 				FB1E68C42C1CC55C004DC0A9 /* Components */,
 				FB1E68C32C1CC55C004DC0A9 /* MobilePaymentsApp.swift */,
 				FB1E68C72C1CC55C004DC0A9 /* Screens */,
@@ -91,10 +147,8 @@
 		FB1E68C72C1CC55C004DC0A9 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				FB1E68C82C1CC55C004DC0A9 /* HomeViewModel.swift */,
-				FB1E68C92C1CC55C004DC0A9 /* HomeView.swift */,
-				FB1E68CA2C1CC55C004DC0A9 /* PermissionsView.swift */,
-				FBA3341A2CAD99AE00CD889A /* PermissionsViewModel.swift */,
+				D0F1F9262CDEB44700E00BB6 /* Permissions */,
+				D0F1F9252CDEB44200E00BB6 /* Home */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -148,6 +202,8 @@
 			packageProductDependencies = (
 				FB1E68DB2C1CC58C004DC0A9 /* MockReaderUI */,
 				FB1E68DD2C1CC58C004DC0A9 /* SquareMobilePaymentsSDK */,
+				D05023652CE52A5B005FA05C /* MockReaderUI */,
+				D05023672CE52A5B005FA05C /* SquareMobilePaymentsSDK */,
 			);
 			productName = MobilePaymentsSwiftUIExample;
 			productReference = FB1E68AD2C1CC50A004DC0A9 /* MobilePaymentsSwiftUIExample.app */;
@@ -179,7 +235,7 @@
 			);
 			mainGroup = FB1E68A42C1CC50A004DC0A9;
 			packageReferences = (
-				FB1E68DA2C1CC58C004DC0A9 /* XCLocalSwiftPackageReference "../.." */,
+				D05023642CE52A5B005FA05C /* XCRemoteSwiftPackageReference "mobile-payments-sdk-ios" */,
 			);
 			productRefGroup = FB1E68AE2C1CC50A004DC0A9 /* Products */;
 			projectDirPath = "";
@@ -229,13 +285,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				FB1E68D22C1CC55C004DC0A9 /* MobilePaymentsApp.swift in Sources */,
+				D09D322F2CE445C4002DB265 /* String+Extensions.swift in Sources */,
 				FB1E68D32C1CC55C004DC0A9 /* MobilePaymentsSDKViewHolder.swift in Sources */,
 				FB1E68D62C1CC55C004DC0A9 /* HomeView.swift in Sources */,
 				FB1E68EB2C1CC5E8004DC0A9 /* MockMobilePaymentsSDK.swift in Sources */,
 				FBA3341B2CAD99AE00CD889A /* PermissionsViewModel.swift in Sources */,
+				D0D5BB652CDD75F20054771D /* Color+Extensions.swift in Sources */,
+				D09D32322CE4704E002DB265 /* IdempotencyKeyStorage.swift in Sources */,
 				FB1E68E92C1CC5E8004DC0A9 /* Config.swift in Sources */,
+				D0F1F9242CDEA4DC00E00BB6 /* PermissionRow.swift in Sources */,
+				D09D322D2CE442F9002DB265 /* Payment+Extensions.swift in Sources */,
 				FB1E68D52C1CC55C004DC0A9 /* HomeViewModel.swift in Sources */,
 				FB1E68D72C1CC55C004DC0A9 /* PermissionsView.swift in Sources */,
+				D09D32342CE50F8E002DB265 /* Config+Extensions.swift in Sources */,
 				FB1E68D42C1CC55C004DC0A9 /* AppButtons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,9 +433,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"../Shared/Preview Content\"";
+				DEVELOPMENT_TEAM = J6PNP64J5X;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Donut Counter";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Square uses Bluetooth to connect and communicate with Square readers and compatible accessories.\n";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Square needs to know where transactions take place to reduce risk and minimize payment disputes.\n";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Some Square readers use the microphone to communicate payment card data to your device.\n";
@@ -407,9 +471,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"../Shared/Preview Content\"";
+				DEVELOPMENT_TEAM = J6PNP64J5X;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Donut Counter";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Square uses Bluetooth to connect and communicate with Square readers and compatible accessories.\n";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Square needs to know where transactions take place to reduce risk and minimize payment disputes.\n";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Some Square readers use the microphone to communicate payment card data to your device.\n";
@@ -456,14 +522,28 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCLocalSwiftPackageReference section */
-		FB1E68DA2C1CC58C004DC0A9 /* XCLocalSwiftPackageReference "../.." */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = ../..;
+/* Begin XCRemoteSwiftPackageReference section */
+		D05023642CE52A5B005FA05C /* XCRemoteSwiftPackageReference "mobile-payments-sdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/square/mobile-payments-sdk-ios";
+			requirement = {
+				kind = exactVersion;
+				version = "2.0.0-beta3";
+			};
 		};
-/* End XCLocalSwiftPackageReference section */
+/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D05023652CE52A5B005FA05C /* MockReaderUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D05023642CE52A5B005FA05C /* XCRemoteSwiftPackageReference "mobile-payments-sdk-ios" */;
+			productName = MockReaderUI;
+		};
+		D05023672CE52A5B005FA05C /* SquareMobilePaymentsSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D05023642CE52A5B005FA05C /* XCRemoteSwiftPackageReference "mobile-payments-sdk-ios" */;
+			productName = SquareMobilePaymentsSDK;
+		};
 		FB1E68DB2C1CC58C004DC0A9 /* MockReaderUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MockReaderUI;
