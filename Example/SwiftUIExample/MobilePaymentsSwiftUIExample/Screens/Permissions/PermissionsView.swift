@@ -3,7 +3,7 @@ import SquareMobilePaymentsSDK //add
 
 struct PermissionsView: View {
     
-    @ObservedObject var viewModel: PermissionsViewModel
+    @State var viewModel: PermissionsViewModel
     @Binding var presentingPermissionsView: Bool
     
     private var mobilePaymentsSDK: SDKManager { viewModel.mobilePaymentsSDK }
@@ -83,7 +83,7 @@ struct PermissionsView: View {
             
             Divider()
             
-            // Mirophone
+            // Microphone
             PermissionsRow(title: String.Permissions.Microphone.microphonePermissionTitle,
                            description: String.Permissions.Microphone.microphonePermissionDescription,
                            isPermissionGranted: viewModel.isMicrophonePermissionGranted
@@ -177,9 +177,15 @@ struct PermissionsView: View {
         viewModel.authorizationFailed = false
         
         // https://developer.squareup.com/docs/mobile-payments-sdk/ios#4-authorize-the-mobile-payments-sdk
+        guard let accessToken = Config.accessToken,
+              let locationId = Config.locationID
+        else {
+            fatalError("Replace the values in Config.swift with values from your Square account")
+        }
+        
         mobilePaymentsSDK.authorizationManager.authorize(
-            withAccessToken: Config.accessToken,
-            locationID: Config.locationID
+            withAccessToken: accessToken,
+            locationID: locationId
         ) { error in
             viewModel.isLoading = false
             if let error {
@@ -206,5 +212,5 @@ enum AuthorizationStateLabel {
 }
 
 #Preview {
-    PermissionsView(viewModel: PermissionsViewModel(mobilePaymentsSDK: MockMobilePaymentsSDK(), authorizationState: .constant(.authorized)), presentingPermissionsView: .constant(false))
+    PermissionsView(viewModel: PermissionsViewModel(mobilePaymentsSDK: MockMobilePaymentsSDK()), presentingPermissionsView: .constant(false))
 }

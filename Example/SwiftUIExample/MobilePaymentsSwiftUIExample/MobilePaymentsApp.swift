@@ -3,13 +3,16 @@ import SquareMobilePaymentsSDK
 
 class AppDelegate: NSObject, UIApplicationDelegate {
 
-    var mobilePaymentSDK: SDKManager!
+    private(set) var mobilePaymentSDK: SDKManager!
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
-        MobilePaymentsSDK.initialize(squareApplicationID: Config.squareApplicationID)
+        guard let applicationId = Config.squareApplicationID else {
+            fatalError("Replace the values in Config.swift with values from your Square account")
+        }
+        MobilePaymentsSDK.initialize(squareApplicationID: applicationId)
         self.mobilePaymentSDK = MobilePaymentsSDK.shared
         return true
     }

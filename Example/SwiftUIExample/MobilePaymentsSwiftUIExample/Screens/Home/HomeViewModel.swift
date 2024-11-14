@@ -4,7 +4,7 @@ import SquareMobilePaymentsSDK
 import MockReaderUI
 #endif
 
-class HomeViewModel: ObservableObject, PaymentManagerDelegate {
+@Observable class HomeViewModel: PaymentManagerDelegate {
     
     enum PaymentStatus {
         case completed(Payment)
@@ -12,15 +12,15 @@ class HomeViewModel: ObservableObject, PaymentManagerDelegate {
         case canceled
     }
 
-    @Published var showPaymentStatusAlert: Bool = false
-    @Published var lastPaymentStatus: PaymentStatus? = nil
-    @Published var authorizationState: AuthorizationState
+    var showPaymentStatusAlert: Bool = false
+    var lastPaymentStatus: PaymentStatus? = nil
+    var authorizationState: AuthorizationState
 
     let mobilePaymentsSDK: SDKManager
     let idempotencyKeyStorage: IdempotencyKeyStorage<String> = IdempotencyKeyStorage()
     
     #if canImport(MockReaderUI)
-    var mockReader: MockReaderUI?
+    @ObservationIgnored var mockReader: MockReaderUI?
     #endif
 
     init(mobilePaymentsSDK: SDKManager) {
@@ -62,12 +62,25 @@ class HomeViewModel: ObservableObject, PaymentManagerDelegate {
         withError error: Error
     ) {
         // https://developer.squareup.com/docs/mobile-payments-sdk/ios/handling-errors#payment-errors
-        print("\(#function) - \(error.localizedDescription)")
-        
-        // The idempotency key has presumably been utilized at this point, yet the transaction was unsuccessful.
-        // It is essential to delete the idempotency key associated with this sale, allowing
-        // a new key to be generated if the transaction is retried using the same sales ID.
-        idempotencyKeyStorage.delete(id: Config.localSalesID)
+        let paymentError = PaymentError(rawValue: (error as NSError).code)
+        switch paymentError {
+        case .paymentAlreadyInProgress,
+                .notAuthorized,
+                .timedOut:
+            // These errors surface before the idempotency key is used, so there is no need to delete the key.
+            print(error)
+        case .idempotencyKeyReused:
+            print("Developer error: Idempotency key reused. Check the most recent payments to see their status.")
+            // The idempotency key has been utilized at this point, yet the transaction was unsuccessful.
+            // It is essential to delete the idempotency key associated with this sale, allowing
+            // a new key to be generated if the transaction is retried using the same sales ID.
+            idempotencyKeyStorage.delete(id: Config.localSalesID)
+        default:
+            print(error)
+            // Same as the case above, we need to ensure that this sale is no longer associated with this
+            // idempotency key since it has been used, and a new key will be generated when the payment is restarted.
+            idempotencyKeyStorage.delete(id: Config.localSalesID)
+        }
 
         lastPaymentStatus = .failure(error)
         showPaymentStatusAlert = true

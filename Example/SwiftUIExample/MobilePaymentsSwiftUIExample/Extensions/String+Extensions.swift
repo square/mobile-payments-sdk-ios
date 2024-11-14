@@ -34,7 +34,7 @@ extension String {
         
         enum Location {
             static var locationPermissionTitle: String = "Location"
-            static var locationPermissionDescription: String = "Square used location to know where transactions take place. This reduces risk and minimizes payment disputes."
+            static var locationPermissionDescription: String = "Square uses location to know where transactions take place. This reduces risk and minimizes payment disputes."
         }
         
         enum Microphone {

@@ -8,7 +8,7 @@ import MockReaderUI
 struct HomeView: View {
 
     @State private var presentingPermissionsView: Bool = false
-    @ObservedObject var viewModel: HomeViewModel
+    @State var viewModel: HomeViewModel
     
     private let viewHolder: MobilePaymentsSDKViewHolder = MobilePaymentsSDKViewHolder()
     private var mobilePaymentsSDK: SDKManager { viewModel.mobilePaymentsSDK }
@@ -95,8 +95,7 @@ struct HomeView: View {
             // https://developer.squareup.com/docs/mobile-payments-sdk/ios#privacy-permissions
             PermissionsView(
                 viewModel: PermissionsViewModel(
-                    mobilePaymentsSDK: mobilePaymentsSDK,
-                    authorizationState: $viewModel.authorizationState
+                    mobilePaymentsSDK: mobilePaymentsSDK
                 ),
                 presentingPermissionsView: $presentingPermissionsView
             )

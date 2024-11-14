@@ -4,24 +4,27 @@ import CoreLocation
 import SquareMobilePaymentsSDK
 import SwiftUI
 
-class PermissionsViewModel: NSObject, ObservableObject {
+@Observable class PermissionsViewModel: NSObject {
     
-    @Published var isBluetoothPermissionGranted: Bool = false
-    @Published var isLocationPermissionGranted: Bool = false
-    @Published var isMicrophonePermissionGranted: Bool = false
-    @Published var isLoading: Bool = false
-    @Published var authorizationFailed: Bool = false
-    @Binding var authorizationState: AuthorizationState
+    var isBluetoothPermissionGranted: Bool = false
+    var isLocationPermissionGranted: Bool = false
+    var isMicrophonePermissionGranted: Bool = false
+    var isLoading: Bool = false
+    var authorizationFailed: Bool = false
+    var authorizationState: AuthorizationState
 
-    private var bluetoothManager: CBCentralManager?
-    private var locationManager: CLLocationManager = CLLocationManager()
+    @ObservationIgnored private var bluetoothManager: CBCentralManager?
+    @ObservationIgnored private var locationManager: CLLocationManager = CLLocationManager()
     
     let mobilePaymentsSDK: SDKManager
     
-    init(mobilePaymentsSDK: SDKManager, authorizationState: Binding<AuthorizationState>) {
+    init(mobilePaymentsSDK: SDKManager) {
         self.mobilePaymentsSDK = mobilePaymentsSDK
-        self._authorizationState = authorizationState
+        self.authorizationState = mobilePaymentsSDK.authorizationManager.state
         super.init()
+        
+        mobilePaymentsSDK.authorizationManager.add(self)
+        refreshAuthorizationState()
         
         locationManager.delegate = self
         refreshAllPermissionsStatus()
@@ -97,6 +100,14 @@ class PermissionsViewModel: NSObject, ObservableObject {
             UIApplication.shared.open(settingsUrl, options: [:]) { _ in }
         }
     }
+    
+    private func refreshAuthorizationState() {
+        authorizationState = mobilePaymentsSDK.authorizationManager.state
+    }
+    
+    deinit {
+        mobilePaymentsSDK.authorizationManager.remove(self)
+    }
 }
 
 // MARK: - CBCentralManagerDelegate
@@ -114,4 +125,10 @@ extension PermissionsViewModel: CLLocationManagerDelegate {
     }
 }
 
+// MARK: - AuthorizationStateObserver
 
+extension PermissionsViewModel: AuthorizationStateObserver {
+    func authorizationStateDidChange(_ authorizationState: AuthorizationState) {
+        refreshAuthorizationState()
+    }
+}
