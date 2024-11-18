@@ -8,12 +8,16 @@ import MockReaderUI
 struct HomeView: View {
 
     @State private var presentingPermissionsView: Bool = false
+    @State var isMockReaderPresented: Bool = false
     @State var viewModel: HomeViewModel
     
     private let viewHolder: MobilePaymentsSDKViewHolder = MobilePaymentsSDKViewHolder()
     private var mobilePaymentsSDK: SDKManager { viewModel.mobilePaymentsSDK }
     private var isIPad: Bool {
         UIDevice.current.userInterfaceIdiom == .pad
+    }
+    private var isMockReaderAvailable: Bool {
+        viewModel.authorizationState == .authorized && mobilePaymentsSDK.settingsManager.sdkSettings.environment == .sandbox
     }
 
     init(viewModel: HomeViewModel) {
@@ -29,6 +33,9 @@ struct HomeView: View {
             VStack {
                 headerView
                 contentView
+                if isMockReaderAvailable {
+                    mockReaderButton
+                }
                 Spacer()
             }
             .alert(isPresented: $viewModel.showPaymentStatusAlert) {
@@ -38,10 +45,12 @@ struct HomeView: View {
         .padding([.leading, .trailing], isIPad ? 50 : nil)
         .padding([.top, .bottom])
         .background(Color.white)
-        .onAppear (perform: setupMockReader)
-        .onChange(of: viewModel.authorizationState, perform: { _ in
-            setupMockReader()
-        })
+        .onChange(of: viewModel.authorizationState) { oldValue, newValue in
+            if newValue == .notAuthorized {
+                // Mock reader is required to be in an authorized sandbox environment
+                dismissMockReader()
+            }
+        }
     }
     
     // MARK: - Subviews
@@ -168,6 +177,26 @@ struct HomeView: View {
         .disabled(viewModel.authorizationState != .authorized)
     }
     
+    private var mockReaderButton: some View {
+        Button {
+            if isMockReaderPresented {
+                dismissMockReader()
+            } else {
+                presentMockReader()
+            }
+            
+        } label: {
+            if isMockReaderPresented {
+                Text(String.Home.MockReaderButton.hideMockReaderTitle)
+            } else {
+                Text(String.Home.MockReaderButton.showMockReaderTitle)
+            }
+        }
+        .buttonStyle(MockReaderButtonStyle(isPresented: isMockReaderPresented))
+        .font(.body)
+        .fontWeight(.semibold)
+    }
+    
     // MARK: - Alerts
     
     private var paymentStatusAlert: Alert {
@@ -187,17 +216,11 @@ struct HomeView: View {
         }
     }
     
-    // MARK: - Private Methods
-    private func setupMockReader() {
+    // MARK: - Mock Reader UI
+    
+    private func presentMockReader() {
         #if canImport(MockReaderUI)
-        // Mock reader is only available in an authorized sandbox environment.
-        guard mobilePaymentsSDK.authorizationManager.state == .authorized,
-              mobilePaymentsSDK.settingsManager.sdkSettings.environment == .sandbox 
-        else {
-            viewModel.mockReader?.dismiss()
-            viewModel.mockReader = nil
-            return
-        }
+        guard isMockReaderAvailable else { return }
         
         // Present mock reader
         do {
@@ -205,12 +228,21 @@ struct HomeView: View {
                 self.viewModel.mockReader = try MockReaderUI(for: mobilePaymentsSDK)
             }
             
-            if let mockReader = viewModel.mockReader {
+            if let mockReader = viewModel.mockReader, !isMockReaderPresented {
                 try mockReader.present()
+                isMockReaderPresented = true
             }
         } catch (let error) {
             print("Mock Reader Error: \(error.localizedDescription)")
         }
+        #endif
+    }
+    
+    private func dismissMockReader() {
+        #if canImport(MockReaderUI)
+        guard let mockReader = viewModel.mockReader, isMockReaderPresented else { return }
+        mockReader.dismiss()
+        isMockReaderPresented = false
         #endif
     }
 }

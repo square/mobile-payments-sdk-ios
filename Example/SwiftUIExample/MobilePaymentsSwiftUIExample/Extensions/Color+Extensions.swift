@@ -73,6 +73,12 @@ extension Color {
             static var foreground: Color = .black
             static var background: Color = Color(hex: "000000", opacity: 0.05)
         }
+        
+        enum MockReader {
+            static var foreground: Color = .black
+            static var showMockReaderBackground: Color = Color(hex: "E5ACD4")
+            static var hideMockReaderBackground: Color = Color(hex: "000000", opacity: 0.05)
+        }
     }
     
     enum Permissions {

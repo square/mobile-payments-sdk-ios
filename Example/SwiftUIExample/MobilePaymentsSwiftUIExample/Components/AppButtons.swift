@@ -40,6 +40,20 @@ struct AuthorizationButtonStyle: ButtonStyle {
     }
 }
 
+struct MockReaderButtonStyle: ButtonStyle {
+    var isPresented: Bool
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(maxWidth: .infinity)
+            .padding(16)
+            .background(isPresented ? Color.Button.MockReader.hideMockReaderBackground : Color.Button.MockReader.showMockReaderBackground)
+            .foregroundStyle(Color.Button.MockReader.foreground)
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+            .clipShape(.rect(cornerRadius: 6))
+    }
+}
+
 struct DismissButton: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label

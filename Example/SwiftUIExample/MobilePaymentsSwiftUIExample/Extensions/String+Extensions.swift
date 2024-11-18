@@ -22,6 +22,11 @@ extension String {
             static var paymentFailedTitle: String = "Payment Failed!"
             static var paymentCanceledTitle: String = "Payment Canceled"
         }
+        
+        enum MockReaderButton {
+            static var showMockReaderTitle: String = "Show Mock Reader"
+            static var hideMockReaderTitle: String = "Hide Mock Reader"
+        }
     }
     
     enum Permissions {

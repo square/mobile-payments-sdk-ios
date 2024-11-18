@@ -20,7 +20,7 @@ import MockReaderUI
     let idempotencyKeyStorage: IdempotencyKeyStorage<String> = IdempotencyKeyStorage()
     
     #if canImport(MockReaderUI)
-    @ObservationIgnored var mockReader: MockReaderUI?
+    var mockReader: MockReaderUI? = nil
     #endif
 
     init(mobilePaymentsSDK: SDKManager) {
