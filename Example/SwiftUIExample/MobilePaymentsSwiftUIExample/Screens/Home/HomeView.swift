@@ -6,19 +6,31 @@ import MockReaderUI
 #endif
 
 struct HomeView: View {
+    
+    private enum Constants {
+        static let headerViewBottomPadding: CGFloat = 50
+        static let donutImageWidth: CGFloat = 248
+        static let donutImageBottomPadding: CGFloat = 50
+        static let appNameTextBottomPadding: CGFloat = 32
+        static let authorizationStatusTextTopPadding: CGFloat = 10
+        static let iPadPadding: CGFloat = 50
+    }
+    
+    @SwiftUI.Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
     @State private var presentingPermissionsView: Bool = false
-    @State var isMockReaderPresented: Bool = false
-    @State var viewModel: HomeViewModel
+    @State private var isMockReaderPresented: Bool = false
+    @State private var viewModel: HomeViewModel
     
-    private let viewHolder: MobilePaymentsSDKViewHolder = MobilePaymentsSDKViewHolder()
     private var mobilePaymentsSDK: SDKManager { viewModel.mobilePaymentsSDK }
     private var isIPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
+        horizontalSizeClass == .regular
     }
     private var isMockReaderAvailable: Bool {
         viewModel.authorizationState == .authorized && mobilePaymentsSDK.settingsManager.sdkSettings.environment == .sandbox
     }
+    
+    private let viewHolder: MobilePaymentsSDKViewHolder = MobilePaymentsSDKViewHolder()
 
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -33,16 +45,13 @@ struct HomeView: View {
             VStack {
                 headerView
                 contentView
+                Spacer()
                 if isMockReaderAvailable {
                     mockReaderButton
                 }
-                Spacer()
-            }
-            .alert(isPresented: $viewModel.showPaymentStatusAlert) {
-                paymentStatusAlert
             }
         }
-        .padding([.leading, .trailing], isIPad ? 50 : nil)
+        .padding([.leading, .trailing], isIPad ? Constants.iPadPadding : nil)
         .padding([.top, .bottom])
         .background(Color.white)
         .onChange(of: viewModel.authorizationState) { oldValue, newValue in
@@ -61,7 +70,7 @@ struct HomeView: View {
             Spacer()
             permissionsButton
         }
-        .padding(.bottom, 50)
+        .padding(.bottom, Constants.headerViewBottomPadding)
     }
 
     private var contentView: some View {
@@ -69,13 +78,13 @@ struct HomeView: View {
             Image("donut")
                 .resizable()
                 .aspectRatio(1.0, contentMode: .fit)
-                .frame(width: 248)
-                .padding(.bottom, 54)
+                .frame(width: Constants.donutImageWidth)
+                .padding(.bottom, Constants.donutImageBottomPadding)
             Text(String.Home.appTitle)
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.black)
-                .padding([.bottom], 32)
+                .padding([.bottom], Constants.appNameTextBottomPadding)
             buyDonutButton
                 .buttonStyle(BuyButtonStyle())
                 .font(.body)
@@ -86,7 +95,7 @@ struct HomeView: View {
                     .multilineTextAlignment(.leading)
                     .font(.subheadline)
                     .foregroundStyle(Color.Text.warning)
-                    .padding(.top, 10)
+                    .padding(.top, Constants.authorizationStatusTextTopPadding)
             }
         }
     }
@@ -192,28 +201,8 @@ struct HomeView: View {
                 Text(String.Home.MockReaderButton.showMockReaderTitle)
             }
         }
-        .buttonStyle(MockReaderButtonStyle(isPresented: isMockReaderPresented))
         .font(.body)
         .fontWeight(.semibold)
-    }
-    
-    // MARK: - Alerts
-    
-    private var paymentStatusAlert: Alert {
-        switch viewModel.lastPaymentStatus {
-        case .completed(let payment):
-            Alert(
-                title: Text(String.Home.PaymentStatusAlert.paymentCompletedTitle),
-                message: Text("\(payment.paymentDescription?.debugDescription ?? "")")
-            )
-        case .failure(let error):
-            Alert(
-                title: Text(String.Home.PaymentStatusAlert.paymentFailedTitle),
-                message: Text("\(error.localizedDescription)")
-            )
-        case .canceled, .none:
-            Alert(title: Text(String.Home.PaymentStatusAlert.paymentCanceledTitle))
-        }
     }
     
     // MARK: - Mock Reader UI

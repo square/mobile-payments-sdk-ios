@@ -47,9 +47,7 @@ struct PermissionsRow: View {
                 .foregroundColor(Color.Permissions.iconColor)
                 .padding(.leading, 16)
                 .onTapGesture {
-                    if !isPermissionGranted {
-                        tapAction?()
-                    }
+                    tapAction?()
                 }
         }
         .padding(.bottom, 15)

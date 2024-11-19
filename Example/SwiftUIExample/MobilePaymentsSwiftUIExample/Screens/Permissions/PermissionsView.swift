@@ -3,15 +3,28 @@ import SquareMobilePaymentsSDK //add
 
 struct PermissionsView: View {
     
-    @State var viewModel: PermissionsViewModel
-    @Binding var presentingPermissionsView: Bool
+    private enum Constants {
+        static let permissionsViewBottomPadding: CGFloat = 16
+        static let iPadPadding: CGFloat = 50
+        static let authorizationButtonHeight: CGFloat = 48
+        static let authorizationStatusTextTopPadding: CGFloat = 10
+    }
+    
+    @SwiftUI.Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @State private var viewModel: PermissionsViewModel
+    @Binding private var presentingPermissionsView: Bool
     
     private var mobilePaymentsSDK: SDKManager { viewModel.mobilePaymentsSDK }
     private var isIPad: Bool {
-        UIDevice.current.userInterfaceIdiom == .pad
+        horizontalSizeClass == .regular
     }
     private var isAuthorized: Bool {
         viewModel.authorizationState == .authorized
+    }
+    
+    init(viewModel: PermissionsViewModel, presentingPermissionsView: Binding<Bool>) {
+        self.viewModel = viewModel
+        self._presentingPermissionsView = presentingPermissionsView
     }
     
     var body: some View {
@@ -20,7 +33,7 @@ struct PermissionsView: View {
                 headerView
                 ScrollView {
                     permissionsView
-                        .padding(.bottom, 16)
+                        .padding(.bottom, Constants.permissionsViewBottomPadding)
                     authorizationButton
                     authorizationStatus
                     Spacer()
@@ -32,7 +45,7 @@ struct PermissionsView: View {
                     UIScrollView.appearance().bounces = true
                 }
             }
-            .padding([.leading, .trailing], isIPad ? 50 : nil)
+            .padding([.leading, .trailing], isIPad ? Constants.iPadPadding : nil)
             .padding([.top, .bottom])
         }
         .background(.white)
@@ -41,23 +54,22 @@ struct PermissionsView: View {
     // MARK: - Subviews
     
     private var headerView: some View {
-        HStack {
-            Button {
-                presentingPermissionsView = false
-            } label: {
-                Image(systemName: "xmark")
-                    .font(.body)
-                    .fontWeight(.medium)
+        ZStack {
+            HStack {
+                Button {
+                    presentingPermissionsView = false
+                } label: {
+                    Image(systemName: "xmark")
+                        .font(.body)
+                        .fontWeight(.medium)
+                }
+                .buttonStyle(DismissButton())
+                Spacer()
             }
-            .buttonStyle(DismissButton())
-            Spacer()
             Text(String.Permissions.headerTitle)
                 .font(.title2)
                 .fontWeight(.bold)
                 .foregroundStyle(.black)
-                .padding(.trailing, 45)
-            
-            Spacer()
         }
     }
     
@@ -111,7 +123,7 @@ struct PermissionsView: View {
                 }
             }
         )
-        .frame(height: 48)
+        .frame(height: Constants.authorizationButtonHeight)
         .buttonStyle(AuthorizationButtonStyle(isAuthorized: isAuthorized))
         .font(.headline)
         .disabled(viewModel.isLoading)
@@ -124,7 +136,7 @@ struct PermissionsView: View {
             .multilineTextAlignment(.leading)
             .font(.subheadline)
             .foregroundStyle(authorizationStatusForegroundColor)
-            .padding(.top, 10)
+            .padding(.top, Constants.authorizationStatusTextTopPadding)
     }
     
     // MARK: - Private Properties

@@ -44,7 +44,7 @@ extension String {
         
         enum Microphone {
             static var microphonePermissionTitle: String = "Microphone"
-            static var microphonePermissionDescription: String = "Square’s R4 reader uses the microphone jack to communicate payment card data to your device. You should ask for this permission if you are using an R4 reader."
+            static var microphonePermissionDescription: String = "Square Reader for magstripe uses the microphone to communicate payment card data to your device. You should ask for this permission if you are using a magstripe reader."
         }
         
         enum AuthorizationButton {

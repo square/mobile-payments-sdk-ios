@@ -51,8 +51,15 @@ import SwiftUI
     }
     
     func requestMicrophone() {
-        AVCaptureDevice.requestAccess(for: .audio) { [weak self] _ in
-            self?.refreshMicrophonePermission()
+        switch AVAudioApplication.shared.recordPermission {
+        case .undetermined:
+            AVCaptureDevice.requestAccess(for: .audio) { [weak self] _ in
+                self?.refreshMicrophonePermission()
+            }
+        case .denied:
+            self.openAppSettings()
+        default:
+            return
         }
     }
     
@@ -83,7 +90,7 @@ import SwiftUI
     }
     
     private func refreshMicrophonePermission() {
-        switch AVAudioSession.sharedInstance().recordPermission {
+        switch AVAudioApplication.shared.recordPermission {
         case .granted:
             isMicrophonePermissionGranted = true
         default:

@@ -5,15 +5,7 @@ import MockReaderUI
 #endif
 
 @Observable class HomeViewModel: PaymentManagerDelegate {
-    
-    enum PaymentStatus {
-        case completed(Payment)
-        case failure(Error)
-        case canceled
-    }
 
-    var showPaymentStatusAlert: Bool = false
-    var lastPaymentStatus: PaymentStatus? = nil
     var authorizationState: AuthorizationState
 
     let mobilePaymentsSDK: SDKManager
@@ -51,9 +43,6 @@ import MockReaderUI
         // for the transaction from your backend or generating it locally, prior to calling the
         // `startPayment` method.
         Config.localSalesID = String(UUID().uuidString.prefix(8))
-        
-        lastPaymentStatus = .completed(payment)
-        showPaymentStatusAlert = true
     }
 
     func paymentManager(
@@ -81,9 +70,6 @@ import MockReaderUI
             // idempotency key since it has been used, and a new key will be generated when the payment is restarted.
             idempotencyKeyStorage.delete(id: Config.localSalesID)
         }
-
-        lastPaymentStatus = .failure(error)
-        showPaymentStatusAlert = true
     }
 
     func paymentManager(
@@ -96,9 +82,6 @@ import MockReaderUI
         // It is essential to delete the idempotency key associated with this sale, allowing
         // a new key to be generated if the transaction is retried using the same custom ID.
         idempotencyKeyStorage.delete(id: Config.localSalesID)
-        
-        lastPaymentStatus = .canceled
-        showPaymentStatusAlert = true
     }
     
     private func refreshAuthorizationState() {

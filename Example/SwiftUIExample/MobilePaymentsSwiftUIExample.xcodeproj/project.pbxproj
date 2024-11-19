@@ -433,14 +433,15 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Donut Counter";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Square uses Bluetooth to connect and communicate with Square readers and compatible accessories.\n";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Square needs to know where transactions take place to reduce risk and minimize payment disputes.\n";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Some Square readers use the microphone to communicate payment card data to your device.\n";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Square uses location to know where transactions take place to reduce risk and minimize payment disputes.\n";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Square Reader for magstripe uses the microphone to communicate payment card data to your device.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -471,14 +472,15 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Donut Counter";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Square uses Bluetooth to connect and communicate with Square readers and compatible accessories.\n";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Square needs to know where transactions take place to reduce risk and minimize payment disputes.\n";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Some Square readers use the microphone to communicate payment card data to your device.\n";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Square uses location to know where transactions take place to reduce risk and minimize payment disputes.\n";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Square Reader for magstripe uses the microphone to communicate payment card data to your device.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
