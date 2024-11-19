@@ -1,0 +1,20 @@
+name: iOS Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Build SwiftUI project
+      run: |
+        xcodebuild -project Example/SwiftUIExample/MobilePaymentsSwiftUIExample.xcodeproj -scheme MobilePaymentsSwiftUIExample -sdk iphoneos -configuration Release SKIP_SETUP_SCRIPT=YES CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=NO
