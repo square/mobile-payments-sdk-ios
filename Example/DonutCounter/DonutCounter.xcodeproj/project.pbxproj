@@ -15,7 +15,7 @@
 		D0D89F202CE5AFF700FDD0B8 /* MockReaderUI in Frameworks */ = {isa = PBXBuildFile; productRef = D0D89F1F2CE5AFF700FDD0B8 /* MockReaderUI */; };
 		D0D89F222CE5AFF700FDD0B8 /* SquareMobilePaymentsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D0D89F212CE5AFF700FDD0B8 /* SquareMobilePaymentsSDK */; };
 		D0F1F9242CDEA4DC00E00BB6 /* PermissionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F1F9232CDEA4DC00E00BB6 /* PermissionRow.swift */; };
-		FB1E68D22C1CC55C004DC0A9 /* MobilePaymentsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1E68C32C1CC55C004DC0A9 /* MobilePaymentsApp.swift */; };
+		FB1E68D22C1CC55C004DC0A9 /* DonutCounterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1E68C32C1CC55C004DC0A9 /* DonutCounterApp.swift */; };
 		FB1E68D32C1CC55C004DC0A9 /* MobilePaymentsSDKViewHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1E68C52C1CC55C004DC0A9 /* MobilePaymentsSDKViewHolder.swift */; };
 		FB1E68D42C1CC55C004DC0A9 /* AppButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1E68C62C1CC55C004DC0A9 /* AppButtons.swift */; };
 		FB1E68D52C1CC55C004DC0A9 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1E68C82C1CC55C004DC0A9 /* HomeViewModel.swift */; };
@@ -37,7 +37,7 @@
 		D0D5BB642CDD75F20054771D /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		D0F1F9232CDEA4DC00E00BB6 /* PermissionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionRow.swift; sourceTree = "<group>"; };
 		FB1E68AD2C1CC50A004DC0A9 /* DonutCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DonutCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		FB1E68C32C1CC55C004DC0A9 /* MobilePaymentsApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MobilePaymentsApp.swift; sourceTree = "<group>"; };
+		FB1E68C32C1CC55C004DC0A9 /* DonutCounterApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DonutCounterApp.swift; sourceTree = "<group>"; };
 		FB1E68C52C1CC55C004DC0A9 /* MobilePaymentsSDKViewHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MobilePaymentsSDKViewHolder.swift; sourceTree = "<group>"; };
 		FB1E68C62C1CC55C004DC0A9 /* AppButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppButtons.swift; sourceTree = "<group>"; };
 		FB1E68C82C1CC55C004DC0A9 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -124,7 +124,7 @@
 				D09D32302CE4703B002DB265 /* Helpers */,
 				D0D5BB632CDD75DE0054771D /* Extensions */,
 				FB1E68C42C1CC55C004DC0A9 /* Components */,
-				FB1E68C32C1CC55C004DC0A9 /* MobilePaymentsApp.swift */,
+				FB1E68C32C1CC55C004DC0A9 /* DonutCounterApp.swift */,
 				FB1E68C72C1CC55C004DC0A9 /* Screens */,
 				FB1E68DF2C1CC5E8004DC0A9 /* Shared */,
 			);
@@ -278,7 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FB1E68D22C1CC55C004DC0A9 /* MobilePaymentsApp.swift in Sources */,
+				FB1E68D22C1CC55C004DC0A9 /* DonutCounterApp.swift in Sources */,
 				D09D322F2CE445C4002DB265 /* String+Extensions.swift in Sources */,
 				FB1E68D32C1CC55C004DC0A9 /* MobilePaymentsSDKViewHolder.swift in Sources */,
 				FB1E68D62C1CC55C004DC0A9 /* HomeView.swift in Sources */,
