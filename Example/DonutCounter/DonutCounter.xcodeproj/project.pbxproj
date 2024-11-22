@@ -36,7 +36,7 @@
 		D09D32332CE50F8E002DB265 /* Config+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config+Extensions.swift"; sourceTree = "<group>"; };
 		D0D5BB642CDD75F20054771D /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		D0F1F9232CDEA4DC00E00BB6 /* PermissionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionRow.swift; sourceTree = "<group>"; };
-		FB1E68AD2C1CC50A004DC0A9 /* MobilePaymentsSwiftUIExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobilePaymentsSwiftUIExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB1E68AD2C1CC50A004DC0A9 /* DonutCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DonutCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB1E68C32C1CC55C004DC0A9 /* MobilePaymentsApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MobilePaymentsApp.swift; sourceTree = "<group>"; };
 		FB1E68C52C1CC55C004DC0A9 /* MobilePaymentsSDKViewHolder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MobilePaymentsSDKViewHolder.swift; sourceTree = "<group>"; };
 		FB1E68C62C1CC55C004DC0A9 /* AppButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppButtons.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 		FB1E68A42C1CC50A004DC0A9 = {
 			isa = PBXGroup;
 			children = (
-				FB1E68AF2C1CC50A004DC0A9 /* MobilePaymentsSwiftUIExample */,
+				FB1E68AF2C1CC50A004DC0A9 /* DonutCounter */,
 				FB1E68AE2C1CC50A004DC0A9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -113,12 +113,12 @@
 		FB1E68AE2C1CC50A004DC0A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FB1E68AD2C1CC50A004DC0A9 /* MobilePaymentsSwiftUIExample.app */,
+				FB1E68AD2C1CC50A004DC0A9 /* DonutCounter.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		FB1E68AF2C1CC50A004DC0A9 /* MobilePaymentsSwiftUIExample */ = {
+		FB1E68AF2C1CC50A004DC0A9 /* DonutCounter */ = {
 			isa = PBXGroup;
 			children = (
 				D09D32302CE4703B002DB265 /* Helpers */,
@@ -128,7 +128,7 @@
 				FB1E68C72C1CC55C004DC0A9 /* Screens */,
 				FB1E68DF2C1CC5E8004DC0A9 /* Shared */,
 			);
-			path = MobilePaymentsSwiftUIExample;
+			path = DonutCounter;
 			sourceTree = "<group>";
 		};
 		FB1E68C42C1CC55C004DC0A9 /* Components */ = {
@@ -181,9 +181,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		FB1E68AC2C1CC50A004DC0A9 /* MobilePaymentsSwiftUIExample */ = {
+		FB1E68AC2C1CC50A004DC0A9 /* DonutCounter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FB1E68BB2C1CC50A004DC0A9 /* Build configuration list for PBXNativeTarget "MobilePaymentsSwiftUIExample" */;
+			buildConfigurationList = FB1E68BB2C1CC50A004DC0A9 /* Build configuration list for PBXNativeTarget "DonutCounter" */;
 			buildPhases = (
 				FB1E68A92C1CC50A004DC0A9 /* Sources */,
 				FB1E68AA2C1CC50A004DC0A9 /* Frameworks */,
@@ -194,13 +194,13 @@
 			);
 			dependencies = (
 			);
-			name = MobilePaymentsSwiftUIExample;
+			name = DonutCounter;
 			packageProductDependencies = (
 				D0D89F1F2CE5AFF700FDD0B8 /* MockReaderUI */,
 				D0D89F212CE5AFF700FDD0B8 /* SquareMobilePaymentsSDK */,
 			);
 			productName = MobilePaymentsSwiftUIExample;
-			productReference = FB1E68AD2C1CC50A004DC0A9 /* MobilePaymentsSwiftUIExample.app */;
+			productReference = FB1E68AD2C1CC50A004DC0A9 /* DonutCounter.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -219,7 +219,7 @@
 					};
 				};
 			};
-			buildConfigurationList = FB1E68A82C1CC50A004DC0A9 /* Build configuration list for PBXProject "MobilePaymentsSwiftUIExample" */;
+			buildConfigurationList = FB1E68A82C1CC50A004DC0A9 /* Build configuration list for PBXProject "DonutCounter" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -235,7 +235,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FB1E68AC2C1CC50A004DC0A9 /* MobilePaymentsSwiftUIExample */,
+				FB1E68AC2C1CC50A004DC0A9 /* DonutCounter */,
 			);
 		};
 /* End PBXProject section */
@@ -448,7 +448,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.MobilePaymentsSwiftUIExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.DonutCounter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -487,7 +487,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.MobilePaymentsSwiftUIExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.DonutCounter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -498,7 +498,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		FB1E68A82C1CC50A004DC0A9 /* Build configuration list for PBXProject "MobilePaymentsSwiftUIExample" */ = {
+		FB1E68A82C1CC50A004DC0A9 /* Build configuration list for PBXProject "DonutCounter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FB1E68B92C1CC50A004DC0A9 /* Debug */,
@@ -507,7 +507,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FB1E68BB2C1CC50A004DC0A9 /* Build configuration list for PBXNativeTarget "MobilePaymentsSwiftUIExample" */ = {
+		FB1E68BB2C1CC50A004DC0A9 /* Build configuration list for PBXNativeTarget "DonutCounter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FB1E68BC2C1CC50A004DC0A9 /* Debug */,
