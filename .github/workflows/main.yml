@@ -15,6 +15,6 @@ jobs:
     - name: Checkout Code
       uses: actions/checkout@v2
 
-    - name: Build SwiftUI project
+    - name: Build DonutCounter project
       run: |
-        xcodebuild -project Example/SwiftUIExample/MobilePaymentsSwiftUIExample.xcodeproj -scheme MobilePaymentsSwiftUIExample -sdk iphoneos -configuration Release SKIP_SETUP_SCRIPT=YES CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=NO
+        xcodebuild -project Example/DonutCounter/DonutCounter.xcodeproj -scheme DonutCounter -sdk iphoneos -configuration Release SKIP_SETUP_SCRIPT=YES CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=NO

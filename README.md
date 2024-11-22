@@ -63,3 +63,7 @@ Follow the [Build on iOS guide](https://developer.squareup.com/docs/mobile-payme
 
 If you need more assistance, contact [Developer and App Marketplace Support](https://squareup.com/help/us/en/contact?panel=BF53A9C8EF68) or ask for help in the [Developer Forums](https://developer.squareup.com/forums/).
 
+## Mobile Payments SDK Sample App
+<img src="./Images/donut-counter-home.png" width="300"/> <img src="./Images/donut-counter-take-payment.png" width="300"/>
+
+[Donut Counter](Example/) is a sample application included in the Examples folder of this repository. It is built using SwiftUI and designed to help developers utilize the Square Mobile Payments SDK. This application serves as a practical guide for integrating and leveraging the SDK's capabilities within your own projects. It demonstrates essential functions such as initializing and authorizing the SDK, pairing with Square card readers and mock readers, and processing a $1.00 payment.
