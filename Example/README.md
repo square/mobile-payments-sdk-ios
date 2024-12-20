@@ -6,6 +6,18 @@
 
 Donut Counter is a sample application for building with the [Square Mobile Payments SDK](https://developer.squareup.com/docs/mobile-payments-sdk) on iOS. The app demonstrates how to install and initialize the SDK in a SwiftUI project as well as utilizing the APIs and user interfaces provided by the SDK to authorize a merchant, pair and manage card readers, and take a payment. To get started, follow the steps below.
 
+## SDK Quick Reference
+
+| Reference                        | Sample App Project Location                   |
+| -------------------------------- | ----------------------------------------- |
+| ⚡️ Initializing the SDK          | [DonutCounter/DonutCounterApp.swift](./DonutCounter/DonutCounter/DonutCounterApp.swift#L15) |
+| 🔒 Authorizing the SDK           | [DonutCounter/Screens/Permissions/PermissionsView.swift](./DonutCounter/DonutCounter/Screens/Permissions/PermissionsView.swift#L192-L207) |
+| 💰 Taking a Payment              | [DonutCounter/Screens/Home/HomeView.swift](./DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L155-L182) |
+| ⚙️ Presenting Settings Screen    | [DonutCounter/Screens/Home/HomeView.swift](./DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L128-L136) |
+| 💳 Presenting MockReaderUI       | [DonutCounter/Screens/Home/HomeView.swift](./DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L210-L228) |
+
+# Get Started
+
 ## 1. Review requirements
 
 ### Assumptions
