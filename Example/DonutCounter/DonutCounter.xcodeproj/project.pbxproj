@@ -30,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D078B4152D1610BA00BEC35C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D09D322C2CE442F9002DB265 /* Payment+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Payment+Extensions.swift"; sourceTree = "<group>"; };
 		D09D322E2CE445C4002DB265 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		D09D32312CE4704E002DB265 /* IdempotencyKeyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdempotencyKeyStorage.swift; sourceTree = "<group>"; };
@@ -121,6 +122,7 @@
 		FB1E68AF2C1CC50A004DC0A9 /* DonutCounter */ = {
 			isa = PBXGroup;
 			children = (
+				D078B4152D1610BA00BEC35C /* Info.plist */,
 				D09D32302CE4703B002DB265 /* Helpers */,
 				D0D5BB632CDD75DE0054771D /* Extensions */,
 				FB1E68C42C1CC55C004DC0A9 /* Components */,
@@ -431,6 +433,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DonutCounter/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Donut Counter";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Square uses Bluetooth to connect and communicate with Square readers and compatible accessories.\n";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Square uses location to know where transactions take place to reduce risk and minimize payment disputes.\n";
@@ -470,6 +473,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = DonutCounter/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Donut Counter";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Square uses Bluetooth to connect and communicate with Square readers and compatible accessories.\n";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Square uses location to know where transactions take place to reduce risk and minimize payment disputes.\n";
