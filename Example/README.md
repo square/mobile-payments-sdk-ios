@@ -10,17 +10,17 @@ Donut Counter is a sample application for building with the [Square Mobile Payme
 
 | Feature                          | Sample App Project Location                   |
 | -------------------------------- | ----------------------------------------- |
-| 📝 Configuring the SDK           | [Shared/Config.swift](../Shared/Config.swift) |
-| 🔒 Authorizing the SDK           | [DonutCounter/Screens/Permissions/PermissionsView.swift](../DonutCounter/DonutCounter/Screens/Permissions/PermissionsView.swift#L192-L207) |
-| 💰 Take a Payment                | [DonutCounter/Screens/Home/HomeView.swift](../DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L155-L182) |
-| ⚙️ Present Settings Screen       | [DonutCounter/Screens/Home/HomeView.swift](../DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L128-L136) |
-| 💳 Present MockReaderUI          | [DonutCounter/Screens/Home/HomeView.swift](../DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L210-L228) |
+| 📝 Configuring the SDK           | [Shared/Config.swift](./Shared/Config.swift) |
+| 🔒 Authorizing the SDK           | [DonutCounter/Screens/Permissions/PermissionsView.swift](./DonutCounter/DonutCounter/Screens/Permissions/PermissionsView.swift#L192-L207) |
+| 💰 Take a Payment                | [DonutCounter/Screens/Home/HomeView.swift](./DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L155-L182) |
+| ⚙️ Present Settings Screen       | [DonutCounter/Screens/Home/HomeView.swift](./DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L128-L136) |
+| 💳 Present MockReaderUI          | [DonutCounter/Screens/Home/HomeView.swift](./DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L210-L228) |
 
 ## Get Started
 
-### 1. Review requirements
+## 1. Review requirements
 
-#### Assumptions
+### Assumptions
 The example app makes the following assumptions:
 
 * You have read the [Mobile Payments SDK "Build on iOS"](https://developer.squareup.com/docs/mobile-payments-sdk/ios) documentation. The example app focuses on demonstrating how the Square Mobile Payments SDK works by using all of the provided user interfaces of the SDK.
@@ -28,13 +28,13 @@ The example app makes the following assumptions:
   enabled payment processing on your account (or you are not sure), visit
   [squareup.com/activate](https://squareup.com/activate).
 
-#### Prerequisites
+### Prerequisites
 
 * Confirm your environment meets the Square Mobile Payments SDK build requirements listed in the [root README](../README.md) for this repo.
 * Clone this repo (if you have not already):
   `git clone https://github.com/square/mobile-payments-sdk-ios`
 
-### 2. Get application credentials
+## 2. Get application credentials
 In your [Developer Dashboard](https://developer.squareup.com/apps), create an application or open an existing one you would like to use. If this is your first time creating an application with Square, you can review this [Get Started](https://developer.squareup.com/docs/square-get-started) guide for more information.
 
 On the application's Credentials page, toggle the environment you'd like to use at the top (Production/Sandbox). Sandbox credentials will allow you to take mock payments with a mock reader. Make note of:
@@ -43,28 +43,28 @@ On the application's Credentials page, toggle the environment you'd like to use 
 
 Click "Locations" in the left navigation and make note of the Default Test Account's **Location ID** as well. These values will be used in the next step.
 
-### 3. Configure the SDK
+## 3. Configure the SDK
 In the [Config.swift](./Shared/Config.swift) file, populate the values for Square application id, access token, and location id you obtained from the previous step.
 
-### 4. Run the app
+## 4. Run the app
 1. Open `DonutCounter.xcodeproj` in Xcode
 2. Select the `DonutCounter` target found at the top of Xcode.
 3. Select your desired device and click the Run button.
 
-### 5. Request required permissions
+## 5. Request required permissions
 On the first install of the application, you will be required to grant various device permissions in order for the SDK to be fully functional.
 
 Tap the 'Permissions' button found on the top right of the home view. Tap the empty checkbox next to each permission to grant the specific device permission. The checkbox will update with a checkmark if the proper permission is granted. All permissions must be granted.
 
 <img src="../Images/donut-counter-permissions.png" width="250"/>
 
-### 6. Authorize the SDK
+## 6. Authorize the SDK
 Within the Permissions screen, you will find a `Sign In` button. Tap this button to authorize the sdk with the credentials you provided in Step 3. If an issue occurs during authorization, check the Xcode console for a log with the specific authorization error. You will know the SDK is fully authorized when the button updates to `Sign Out` and the text below the button reads `The device is authorized`.
 
-### 7. Pair a reader
+## 7. Pair a reader
 Depending on what environment you are authorized in, the steps for pairing a reader will differ. Follow the steps below according to your current environment.
 
-#### Production
+### Production
 In a production environment, you are only able to pair actual Square card readers. Mock readers do not work in a production environment.
 
 To pair a reader:
@@ -74,7 +74,7 @@ To pair a reader:
 4. After a successful pair, you should see the reader available in the `Devices` tab of the settings screen.
 5. The reader is ready to be used for payments once the state updates to `Ready`.
 
-#### Sandbox
+### Sandbox
 In a sandbox environment, you are only able to add mock readers utilizing the `MockReaderUI` framework. The `MockReaderUI` framework is provided as a part of this repo and has already been added to the DonutCounter app. Please note that MockReaderUI is to only be used in debug builds of your application, not in a production application.
 
 To pair a mock reader:
@@ -86,7 +86,7 @@ To pair a mock reader:
 
 <img src="../Images/donut-counter-home-mock-reader.png" width="250"/>
 
-### 8. Take a Payment
+## 8. Take a Payment
 
 To process a payment, follow these steps:
 
