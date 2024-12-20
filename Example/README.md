@@ -16,7 +16,7 @@ Donut Counter is a sample application for building with the [Square Mobile Payme
 | ⚙️ Present Settings Screen       | [DonutCounter/Screens/Home/HomeView.swift](./DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L128-L136) |
 | 💳 Present MockReaderUI          | [DonutCounter/Screens/Home/HomeView.swift](./DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L210-L228) |
 
-## Get Started
+# Get Started
 
 ## 1. Review requirements
 
