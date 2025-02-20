@@ -94,15 +94,19 @@ class MockReadCardInfoManager: NSObject, ReadCardInfoManager {
 }
 
 class MockReaderManager: NSObject, ReaderManager {
+    var tapToPaySettings: TapToPaySettings
+    
     var readers: [ReaderInfo]
     var isPairingInProgress: Bool
 
     init(
         readers: [ReaderInfo] = [MockReaderInfo()],
-        isPairingInProgress: Bool = false
+        isPairingInProgress: Bool = false,
+        tapToPaySettings: TapToPaySettings = MockTapToPaySettings()
     ) {
         self.readers = readers
         self.isPairingInProgress = isPairingInProgress
+        self.tapToPaySettings = tapToPaySettings
     }
 
     func startPairing(with delegate: ReaderPairingDelegate) -> PairingHandle? { nil }
@@ -115,6 +119,18 @@ class MockReaderManager: NSObject, ReaderManager {
     func retryConnection(_ readerInfo: ReaderInfo) { }
     func add(_ readerObserver: ReaderObserver) { }
     func remove(_ readerObserver: ReaderObserver) { }
+}
+
+class MockTapToPaySettings: NSObject, TapToPaySettings {
+    var isDeviceCapable: Bool
+    
+    init(isDeviceCapable: Bool = false) {
+        self.isDeviceCapable = isDeviceCapable
+    }
+    
+    func isAppleAccountLinked(completion: @escaping (Bool, (any Error)?) -> Void) { }
+    func linkAppleAccount(completion: @escaping ((any Error)?) -> Void) { }
+    func relinkAppleAccount(completion: @escaping ((any Error)?) -> Void) { }
 }
 
 class MockReaderInfo: NSObject, ReaderInfo {
