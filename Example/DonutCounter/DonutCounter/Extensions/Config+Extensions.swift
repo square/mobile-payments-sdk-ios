@@ -1,11 +1,3 @@
-//
-//  Config+Extensions.swift
-//  MobilePaymentsSwiftUIExample
-//
-//  Created by Tamer Bader on 11/13/24.
-//  Copyright © 2024 Square, Inc. All rights reserved.
-//
-
 import Foundation
 
 extension Config {

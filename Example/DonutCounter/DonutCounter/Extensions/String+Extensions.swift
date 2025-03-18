@@ -1,11 +1,3 @@
-//
-//  String+Extensions.swift
-//  MobilePaymentsSwiftUIExample
-//
-//  Created by Tamer Bader on 11/12/24.
-//  Copyright © 2024 Square, Inc. All rights reserved.
-//
-
 import Foundation
 
 extension String {

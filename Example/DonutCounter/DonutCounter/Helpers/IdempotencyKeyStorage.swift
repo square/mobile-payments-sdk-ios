@@ -1,11 +1,3 @@
-//
-//  IdempotencyKeyStorage.swift
-//  MobilePaymentsSwiftUIExample
-//
-//  Created by Tobi Schweiger on 8/8/23.
-//  Copyright © 2024 Square, Inc. All rights reserved.
-//
-
 import Foundation
 
 /// `IdempotencyKeyStorage` is a class that manages the association between business-logic specific identifiers (such as sales IDs, ticket IDs, order IDs, check numbers, etc.) and uniquely generated idempotency keys.
