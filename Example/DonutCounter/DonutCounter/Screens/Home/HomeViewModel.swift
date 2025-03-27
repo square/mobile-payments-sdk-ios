@@ -30,9 +30,9 @@ import MockReaderUI
     ) {
         // https://developer.squareup.com/docs/mobile-payments-sdk/ios/take-payments#overview
         if let onlinePayment = payment as? OnlinePayment {
-            print("Finished payment with ID: \(onlinePayment.id!) status: \(onlinePayment.status.description)")
+            print("Finished online payment with ID: \(onlinePayment.id!) status: \(onlinePayment.status.description)")
         } else if let offlinePayment = payment as? OfflinePayment {
-            print("Finished payment with ID: \(offlinePayment.localID) status: \(offlinePayment.status.description)")
+            print("Finished offline payment with ID: \(offlinePayment.localID) status: \(offlinePayment.status.description)")
         }
 
         // Upon completion of the order, generate a new custom ID (serving as your unique business-logic ID),

@@ -1,11 +1,3 @@
-//
-//  Color+Extensions.swift
-//  MobilePaymentsSwiftUIExample
-//
-//  Created by Tamer Bader on 11/7/24.
-//  Copyright © 2024 Square, Inc. All rights reserved.
-//
-
 import SwiftUI
 
 extension Color {

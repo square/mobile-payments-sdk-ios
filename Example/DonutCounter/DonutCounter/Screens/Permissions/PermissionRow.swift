@@ -1,10 +1,3 @@
-//
-//  PermissionRow.swift
-//  MobilePaymentsSwiftUIExample
-//
-//  Created by Tamer Bader on 11/8/24.
-//
-
 import Foundation
 import SwiftUI
 

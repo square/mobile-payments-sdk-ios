@@ -1,5 +1,5 @@
+import SquareMobilePaymentsSDK
 import SwiftUI
-import SquareMobilePaymentsSDK //add
 
 struct PermissionsView: View {
     

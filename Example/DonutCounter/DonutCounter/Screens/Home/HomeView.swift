@@ -164,7 +164,8 @@ struct HomeView: View {
                     amountMoney: Money(
                         amount: 100,
                         currency: .USD
-                    )
+                    ),
+                    processingMode: .autoDetect
                 )
 
                 // https://square.github.io/mobile-payments-sdk-ios/docs/documentation/mobilepaymentssdkapi/promptparameters#instance-properties
