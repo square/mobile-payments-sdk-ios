@@ -4,6 +4,9 @@ import PackageDescription
 
 let package = Package(
     name: "SquareMobilePaymentsSDK",
+    platforms: [
+        .iOS("16.0")
+    ],
     products: [
         .library(name: "SquareMobilePaymentsSDK", targets: ["SquareMobilePaymentsSDK"]),
         .library(name: "MockReaderUI", targets: ["MockReaderUI"]),
