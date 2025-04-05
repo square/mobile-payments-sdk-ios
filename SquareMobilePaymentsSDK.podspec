@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.authors = 'Square'
   s.summary = 'Enables developers to build secure in-person payment solutions'
 
-  s.ios.deployment_target = '15.0'
+  s.ios.deployment_target = '16.0'
 
   s.source ={ :http => "https://d3eygymyzkbhx3.cloudfront.net/mpsdk/2.2.1/SquareMobilePaymentsSDK_d62eea75f1c0.zip" }
   s.vendored_frameworks = 'SquareMobilePaymentsSDK.xcframework'
