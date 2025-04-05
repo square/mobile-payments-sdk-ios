@@ -23,5 +23,5 @@ THE SOFTWARE.
   # Since this is a binary pod, redirect the Cocoapods.org entry to the github repo.
   HOMEPAGE_URL = 'https://github.com/square/mobile-payments-sdk-ios'
   AUTHORS = 'Square'
-  IOS_DEPLOYMENT_TARGET = '15.0'
+  IOS_DEPLOYMENT_TARGET = '16.0'
 end
