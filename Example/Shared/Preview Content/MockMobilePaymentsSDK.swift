@@ -62,6 +62,7 @@ class MockLocation: NSObject, Location {
 class MockPaymentManager: NSObject, PaymentManager {
     var availableCardInputMethods: CardInputMethods
     let offlinePaymentQueue: OfflinePaymentQueue
+    let currentPaymentHandle: (any PaymentHandle)?
 
     init(
         availableCardInputMethods: CardInputMethods = .init([.chip, .contactless, .swipe]),
@@ -69,6 +70,7 @@ class MockPaymentManager: NSObject, PaymentManager {
     ) {
         self.availableCardInputMethods = availableCardInputMethods
         self.offlinePaymentQueue = offlinePaymentQueue
+        self.currentPaymentHandle = nil
     }
 
     func startPayment(
