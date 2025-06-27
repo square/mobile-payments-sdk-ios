@@ -3,7 +3,7 @@
 
 # Square Mobile Payments SDK
 
-Build remarkable in-person experiences using Square's Mobile Payments SDK product, now in beta. Use the Mobile Payments SDK to accept in-person payments using Square hardware. The Mobile Payments SDK has the advantage of being an API-driven framework that allows for full customization and uses the latest [v2/payments](https://developer.squareup.com/explorer/square/payments-api/list-payments) API.
+Build remarkable in-person experiences using Square's Mobile Payments SDK product. Use the Mobile Payments SDK to accept in-person payments using Square hardware. The Mobile Payments SDK has the advantage of being an API-driven framework that allows for full customization and uses Square's latest [v2/payments](https://developer.squareup.com/explorer/square/payments-api/list-payments) API.
 
 Learn what you can do with the Mobile Payments SDK [here](https://developer.squareup.com/docs/mobile-payments-sdk).
 
