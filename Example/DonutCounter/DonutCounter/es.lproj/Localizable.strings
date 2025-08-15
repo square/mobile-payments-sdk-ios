@@ -1,0 +1,56 @@
+/* Main app title */
+"Donut Counter" = "Contador de Donuts";
+
+/* Message shown when device is not authorized */
+"Device not authorized. Open permissions to authorize." = "Dispositivo no autorizado. Abrir permisos para autorizar.";
+
+/* Title for permissions button */
+"Permissions" = "Permisos";
+
+/* Title for settings button */
+"Settings" = "Configuración";
+
+/* Title for buy donut button */
+"Buy for $1" = "Comprar por $1";
+
+/* Title for payment completed alert */
+"Payment Completed!" = "¡Pago Completado!";
+
+/* Title for payment failed alert */
+"Payment Failed!" = "¡Pago Falló!";
+
+/* Title for payment canceled alert */
+"Payment Canceled" = "Pago Cancelado";
+
+/* Title for show mock reader button */
+"Show Mock Reader" = "Mostrar Lector de Prueba";
+
+/* Title for hide mock reader button */
+"Hide Mock Reader" = "Ocultar Lector de Prueba";
+
+/* Permissions screen header title */
+"Permissions" = "Permisos";
+
+/* Bluetooth permission title */
+"Bluetooth" = "Bluetooth";
+
+/* Bluetooth permission description */
+"Square uses Bluetooth to connect and communicate with Square devices. \nYou should ask for this permission if you are using readers that connect via Bluetooth." = "Square usa Bluetooth para conectarse y comunicarse con dispositivos Square. \nDebes solicitar este permiso si estás usando lectores que se conectan vía Bluetooth.";
+
+/* Location permission title */
+"Location" = "Ubicación";
+
+/* Location permission description */
+"Square uses location to know where transactions take place. This reduces risk and minimizes payment disputes." = "Square usa la ubicación para saber dónde tienen lugar las transacciones. Esto reduce el riesgo y minimiza las disputas de pago.";
+
+/* Microphone permission title */
+"Microphone" = "Micrófono";
+
+/* Microphone permission description */
+"Square Reader for magstripe uses the microphone to communicate payment card data to your device. You should ask for this permission if you are using a magstripe reader." = "Square Reader para banda magnética usa el micrófono para comunicar datos de tarjetas de pago a tu dispositivo. Debes solicitar este permiso si estás usando un lector de banda magnética.";
+
+/* Authorization button title */
+"Sign In" = "Iniciar Sesión";
+
+/* Deauthorization button title */
+"Sign out" = "Cerrar Sesión";
