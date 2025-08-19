@@ -27,4 +27,8 @@ jobs:
           chmod +x Scripts/git/pull-request-validator.rb
 
           # Run the validation script
-          ruby Scripts/git/pull-request-validator.rb
+          ruby Scripts/git/pull-request-validator.rb'
+
+      - name: Build DonutCounter project
+        run: |
+          xcodebuild -project Example/DonutCounter/DonutCounter.xcodeproj -scheme DonutCounter -sdk iphoneos -configuration Release SKIP_SETUP_SCRIPT=YES CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY=NO
