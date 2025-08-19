@@ -1,0 +1,56 @@
+/* Main app title */
+"Donut Counter" = "ドーナツカウンター";
+
+/* Message shown when device is not authorized */
+"Device not authorized. Open permissions to authorize." = "デバイスが認証されていません。許可設定を開いて認証してください。";
+
+/* Title for permissions button */
+"Permissions" = "許可設定";
+
+/* Title for settings button */
+"Settings" = "設定";
+
+/* Title for buy donut button */
+"Buy for $1" = "1ドルで購入";
+
+/* Title for payment completed alert */
+"Payment Completed!" = "支払い完了！";
+
+/* Title for payment failed alert */
+"Payment Failed!" = "支払い失敗！";
+
+/* Title for payment canceled alert */
+"Payment Canceled" = "支払いキャンセル";
+
+/* Title for show mock reader button */
+"Show Mock Reader" = "モックリーダーを表示";
+
+/* Title for hide mock reader button */
+"Hide Mock Reader" = "モックリーダーを非表示";
+
+/* Permissions screen header title */
+"Permissions" = "許可設定";
+
+/* Bluetooth permission title */
+"Bluetooth" = "Bluetooth";
+
+/* Bluetooth permission description */
+"Square uses Bluetooth to connect and communicate with Square devices. \nYou should ask for this permission if you are using readers that connect via Bluetooth." = "SquareはBluetoothを使用してSquareデバイスに接続し、通信します。\nBluetooth経由で接続するリーダーを使用している場合は、この許可を求める必要があります。";
+
+/* Location permission title */
+"Location" = "位置情報";
+
+/* Location permission description */
+"Square uses location to know where transactions take place. This reduces risk and minimizes payment disputes." = "Squareは位置情報を使用して取引が行われる場所を把握します。これによりリスクが軽減され、支払いに関する紛争が最小限に抑えられます。";
+
+/* Microphone permission title */
+"Microphone" = "マイク";
+
+/* Microphone permission description */
+"Square Reader for magstripe uses the microphone to communicate payment card data to your device. You should ask for this permission if you are using a magstripe reader." = "磁気ストライプ用Square Readerは、マイクを使用して支払いカードデータをデバイスに送信します。磁気ストライプリーダーを使用している場合は、この許可を求める必要があります。";
+
+/* Authorization button title */
+"Sign In" = "サインイン";
+
+/* Deauthorization button title */
+"Sign out" = "サインアウト";
