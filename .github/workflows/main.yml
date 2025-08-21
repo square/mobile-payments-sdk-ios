@@ -13,7 +13,10 @@ jobs:
     runs-on: macos-latest
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v5
+
+    - name: Setup Xcode
+      uses: ./.github/actions/setup-xcode
 
     - name: Build DonutCounter project
       run: |

@@ -14,7 +14,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
+
+      - name: Setup Xcode
+        uses: ./.github/actions/setup-xcode
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
