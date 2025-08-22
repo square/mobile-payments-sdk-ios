@@ -1,4 +1,6 @@
+import Foundation
 import SquareMobilePaymentsSDK
+import UIKit
 
 class MockMobilePaymentsSDK: NSObject, SDKManager {
     let authorizationManager: AuthorizationManager
@@ -213,15 +215,19 @@ class MockSettingsManager: NSObject, SettingsManager {
 }
 
 class MockSDKSettings: NSObject, SDKSettings {
+    
     let environment: Environment
     let version: String
+    let securityComplianceVersion: String
 
     init(
         environment: Environment = .sandbox,
-        version: String = "1"
+        version: String = "1",
+        securityComplianceVersion: String = "1"
     ) {
         self.environment = environment
         self.version = version
+        self.securityComplianceVersion = securityComplianceVersion
     }
 }
 
