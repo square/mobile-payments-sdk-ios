@@ -83,6 +83,7 @@ class MockPaymentManager: NSObject, PaymentManager {
     ) -> PaymentHandle? { nil }
     func add(_ availableCardInputMethodsObserver: AvailableCardInputMethodsObserver) { }
     func remove(_ availableCardInputMethodsObserver: AvailableCardInputMethodsObserver) { }
+    func getIdempotencyKey(withPaymentAttemptId paymentAttemptId: String) -> String? { nil }
 }
 
 class MockOfflinePaymentQueue: NSObject, OfflinePaymentQueue {
@@ -146,6 +147,7 @@ class MockReaderInfo: NSObject, ReaderInfo {
     var connectionInfo: ReaderConnectionInfo
     var firmwareInfo: ReaderFirmwareInfo?
     var state: ReaderState
+    var statusInfo: ReaderStatusInfo
     var batteryStatus: ReaderBatteryStatus?
     var isBlinkable: Bool
     var isForgettable: Bool
@@ -161,6 +163,7 @@ class MockReaderInfo: NSObject, ReaderInfo {
         connectionInfo: ReaderConnectionInfo = MockReaderConnectionInfo(),
         firmwareInfo: ReaderFirmwareInfo? = nil,
         state: ReaderState = .ready,
+        statusInfo: ReaderStatusInfo = MockReaderStatusInfo(),
         batteryStatus: ReaderBatteryStatus? = nil,
         isBlinkable: Bool = true,
         isForgettable: Bool = true,
@@ -175,6 +178,7 @@ class MockReaderInfo: NSObject, ReaderInfo {
         self.connectionInfo = connectionInfo
         self.firmwareInfo = firmwareInfo
         self.state = state
+        self.statusInfo = statusInfo
         self.batteryStatus = batteryStatus
         self.isBlinkable = isBlinkable
         self.isForgettable = isForgettable
@@ -184,8 +188,8 @@ class MockReaderInfo: NSObject, ReaderInfo {
 }
 
 class MockReaderConnectionInfo: NSObject, ReaderConnectionInfo {
-    var state: ReaderConnectionState
-    var failureInfo: ReaderConnectionFailureInfo?
+    let state: ReaderConnectionState
+    let failureInfo: ReaderConnectionFailureInfo?
 
     init(
         state: ReaderConnectionState = .connected,
@@ -196,22 +200,46 @@ class MockReaderConnectionInfo: NSObject, ReaderConnectionInfo {
     }
 }
 
+class MockReaderStatusInfo: NSObject, ReaderStatusInfo {
+    let status: ReaderStatus
+    let reason: ReaderUnavailableReason
+    let title: String
+    let _description: String
+
+    init(
+        status: ReaderStatus = .ready,
+        reason: ReaderUnavailableReason = .none,
+        title: String = "",
+        _description: String = ""
+    ) {
+        self.status = status
+        self.reason = reason
+        self.title = title
+        self._description = _description
+    }
+}
+
 class MockSettingsManager: NSObject, SettingsManager {
     let sdkSettings: SDKSettings
     let paymentSettings: PaymentSettings
+    let trackingConsentState: TrackingConsentState
 
     init(
         sdkSettings: SDKSettings = MockSDKSettings(),
-        paymentSettings: PaymentSettings = MockPaymentSettings()
+        paymentSettings: PaymentSettings = MockPaymentSettings(),
+        trackingConsentState: TrackingConsentState = .granted
     ) {
         self.sdkSettings = sdkSettings
         self.paymentSettings = paymentSettings
+        self.trackingConsentState = trackingConsentState
     }
 
     func presentSettings(
         with viewController: UIViewController,
         completion: @escaping (Error?) -> Void
     ) { }
+
+    func updateTrackingConsent(withGranted granted: Bool) { }
 }
 
 class MockSDKSettings: NSObject, SDKSettings {
