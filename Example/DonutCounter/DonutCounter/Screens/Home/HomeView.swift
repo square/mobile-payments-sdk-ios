@@ -147,25 +147,21 @@ struct HomeView: View {
     private var buyDonutButton: some View {
         Button(
             action: {
-                // https://developer.squareup.com/docs/mobile-payments-sdk/ios/take-payments#idempotency-keys
-                // Retrieves an idempotency key associated with the current sales ID from storage. If no existing key is found,
-                // a new UUID is generated and stored as the idempotency key for that sales ID. The retrieved or newly generated
-                // idempotency key is then assigned to the payment parameters, ensuring that the transaction maintains its uniqueness,
-                // even if it needs to be retried.
-                let idempotencyKey = viewModel.idempotencyKeyStorage.get(id: Config.localSalesID) ?? {
-                    let newKey = UUID().uuidString
-                    viewModel.idempotencyKeyStorage.store(id: Config.localSalesID, idempotencyKey: newKey)
-                    return newKey
-                }()
-                
+                // Generate a paymentAttemptID to be used for this payment.
+                // Your actual implementation should not be as simple as generating a UUID before
+                // starting the payment. The ID should be generated based on some type of order/sales ID
+                // in order to prevent duplicate payments.
+                // See our documentation for tips and best practices: https://developer.squareup.com/docs/mobile-payments-sdk/ios#7-set-up-a-payment
+                let paymentAttemptID = UUID().uuidString
+
                 // https://square.github.io/mobile-payments-sdk-ios/docs/documentation/mobilepaymentssdkapi/paymentparameters#instance-properties
                 let paymentParameters = PaymentParameters(
-                    idempotencyKey: idempotencyKey,
+                    paymentAttemptID: paymentAttemptID,
                     amountMoney: Money(
                         amount: 100,
                         currency: .USD
                     ),
-                    processingMode: .autoDetect
+                    processingMode: processingMode()
                 )
 
                 // https://square.github.io/mobile-payments-sdk-ios/docs/documentation/mobilepaymentssdkapi/promptparameters#instance-properties
@@ -234,6 +230,14 @@ struct HomeView: View {
         mockReader.dismiss()
         isMockReaderPresented = false
         #endif
+    }
+
+    private func processingMode() -> ProcessingMode {
+        // Sandbox mode currently only supports onlineOnly payments.
+        if viewModel.settingsManager.sdkSettings.environment == .sandbox {
+            return .onlineOnly
+        }
+        return .autoDetect
     }
 }
 

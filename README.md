@@ -17,7 +17,7 @@ Install with [Swift Package Manager](https://www.swift.org/documentation/package
 
 1. Select `File > Add Package Dependencies...`.
 2. Enter the repository URL: `https://github.com/square/mobile-payments-sdk-ios`.
-3. Select the `Exact Version` dependency rule and specify the version as `2.2.4`.
+3. Select the `Exact Version` dependency rule and specify the version as `2.3.0`.
 4. Ensure the `SquareMobilePaymentsSDK` product is added to your target.
 
 Optionally, you can also add the `MockReaderUI` product to your target to simulate a physical reader when one is not present in a sandbox environment.
@@ -29,11 +29,11 @@ Install with [CocoaPods](http://cocoapods.org/) by adding the following to your 
 ```
 use_frameworks!
 
-pod "SquareMobilePaymentsSDK", "~> 2.2.4"
+pod "SquareMobilePaymentsSDK", "~> 2.3.0"
 
 # Optionally include MockReaderUI if you wish to simulate a physical reader when one is not present.
 # This feature is only available when provided a sandbox application ID.
-pod "MockReaderUI", "~> 2.2.4", configurations: ['Debug']
+pod "MockReaderUI", "~> 2.3.0", configurations: ['Debug']
 ```
 _Note that MockReaderUI framework **requires** the `SquareMobilePaymentsSDK` framework to also be present in your `Podfile`._
 

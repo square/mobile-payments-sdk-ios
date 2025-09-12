@@ -10,8 +10,6 @@
 		3754DA322E4FD2F90093C7F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3754DA312E4FD2F90093C7F6 /* Localizable.strings */; };
 		D09D322D2CE442F9002DB265 /* Payment+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09D322C2CE442F9002DB265 /* Payment+Extensions.swift */; };
 		D09D322F2CE445C4002DB265 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09D322E2CE445C4002DB265 /* String+Extensions.swift */; };
-		D09D32322CE4704E002DB265 /* IdempotencyKeyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09D32312CE4704E002DB265 /* IdempotencyKeyStorage.swift */; };
-		D09D32342CE50F8E002DB265 /* Config+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09D32332CE50F8E002DB265 /* Config+Extensions.swift */; };
 		D0D5BB652CDD75F20054771D /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D5BB642CDD75F20054771D /* Color+Extensions.swift */; };
 		D0D89F202CE5AFF700FDD0B8 /* MockReaderUI in Frameworks */ = {isa = PBXBuildFile; productRef = D0D89F1F2CE5AFF700FDD0B8 /* MockReaderUI */; };
 		D0D89F222CE5AFF700FDD0B8 /* SquareMobilePaymentsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D0D89F212CE5AFF700FDD0B8 /* SquareMobilePaymentsSDK */; };
@@ -38,8 +36,6 @@
 		D078B4152D1610BA00BEC35C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D09D322C2CE442F9002DB265 /* Payment+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Payment+Extensions.swift"; sourceTree = "<group>"; };
 		D09D322E2CE445C4002DB265 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
-		D09D32312CE4704E002DB265 /* IdempotencyKeyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdempotencyKeyStorage.swift; sourceTree = "<group>"; };
-		D09D32332CE50F8E002DB265 /* Config+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Config+Extensions.swift"; sourceTree = "<group>"; };
 		D0D5BB642CDD75F20054771D /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		D0F1F9232CDEA4DC00E00BB6 /* PermissionRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionRow.swift; sourceTree = "<group>"; };
 		FB1E68AD2C1CC50A004DC0A9 /* DonutCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DonutCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,21 +66,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D09D32302CE4703B002DB265 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				D09D32312CE4704E002DB265 /* IdempotencyKeyStorage.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
 		D0D5BB632CDD75DE0054771D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				D0D5BB642CDD75F20054771D /* Color+Extensions.swift */,
 				D09D322C2CE442F9002DB265 /* Payment+Extensions.swift */,
 				D09D322E2CE445C4002DB265 /* String+Extensions.swift */,
-				D09D32332CE50F8E002DB265 /* Config+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -128,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				3754DA312E4FD2F90093C7F6 /* Localizable.strings */,
-				D09D32302CE4703B002DB265 /* Helpers */,
 				D0D5BB632CDD75DE0054771D /* Extensions */,
 				FB1E68C42C1CC55C004DC0A9 /* Components */,
 				FB1E68C32C1CC55C004DC0A9 /* DonutCounterApp.swift */,
@@ -219,7 +205,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1510;
+				LastUpgradeCheck = 1640;
 				TargetAttributes = {
 					FB1E68AC2C1CC50A004DC0A9 = {
 						CreatedOnToolsVersion = 15.1;
@@ -297,13 +283,11 @@
 				FB1E68EB2C1CC5E8004DC0A9 /* MockMobilePaymentsSDK.swift in Sources */,
 				FBA3341B2CAD99AE00CD889A /* PermissionsViewModel.swift in Sources */,
 				D0D5BB652CDD75F20054771D /* Color+Extensions.swift in Sources */,
-				D09D32322CE4704E002DB265 /* IdempotencyKeyStorage.swift in Sources */,
 				FB1E68E92C1CC5E8004DC0A9 /* Config.swift in Sources */,
 				D0F1F9242CDEA4DC00E00BB6 /* PermissionRow.swift in Sources */,
 				D09D322D2CE442F9002DB265 /* Payment+Extensions.swift in Sources */,
 				FB1E68D52C1CC55C004DC0A9 /* HomeViewModel.swift in Sources */,
 				FB1E68D72C1CC55C004DC0A9 /* PermissionsView.swift in Sources */,
-				D09D32342CE50F8E002DB265 /* Config+Extensions.swift in Sources */,
 				FB1E68D42C1CC55C004DC0A9 /* AppButtons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,6 +314,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -393,6 +378,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
