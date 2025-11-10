@@ -122,6 +122,7 @@ class MockReaderManager: NSObject, ReaderManager {
     func forget(_ readerInfo: ReaderInfo) { }
     func blink(_ readerInfo: ReaderInfo) { }
     func retryConnection(_ readerInfo: ReaderInfo) { }
+    func rebootReader(_ readerInfo: ReaderInfo) { }
     func add(_ readerObserver: ReaderObserver) { }
     func remove(_ readerObserver: ReaderObserver) { }
 }
@@ -152,6 +153,7 @@ class MockReaderInfo: NSObject, ReaderInfo {
     var isBlinkable: Bool
     var isForgettable: Bool
     var isConnectionRetryable: Bool
+    var isRebootable: Bool
     var cardInsertionStatus: CardInsertionStatus
 
     init(
@@ -168,6 +170,7 @@ class MockReaderInfo: NSObject, ReaderInfo {
         isBlinkable: Bool = true,
         isForgettable: Bool = true,
         isConnectionRetryable: Bool = false,
+        isRebootable: Bool = false,
         cardInsertionStatus: CardInsertionStatus = .notInserted
     ) {
         self.id = id
@@ -183,6 +186,7 @@ class MockReaderInfo: NSObject, ReaderInfo {
         self.isBlinkable = isBlinkable
         self.isForgettable = isForgettable
         self.isConnectionRetryable = isConnectionRetryable
+        self.isRebootable = isRebootable
         self.cardInsertionStatus = cardInsertionStatus
     }
 }
@@ -200,19 +204,25 @@ class MockReaderConnectionInfo: NSObject, ReaderConnectionInfo {
     }
 }
 
-class MockReaderStatusInfo: NSObject, ReaderStatusInfo {
+class MockReaderStatusInfo: NSObject, ReaderStatusInfo {    
     let status: ReaderStatus
+    let unavailableReasonInfo: (any ReaderUnavailableReasonInfo)?
+    let dictionaryRepresentation: [String : Any]
     let reason: ReaderUnavailableReason
     let title: String
     let _description: String
 
     init(
         status: ReaderStatus = .ready,
-        reason: ReaderUnavailableReason = .none,
+        unavailableReasonInfo: (any ReaderUnavailableReasonInfo)? = nil,
+        dictionaryRepresentation: [String : Any] = [:],
+        reason: ReaderUnavailableReason = .internalError,
         title: String = "",
         _description: String = ""
     ) {
         self.status = status
+        self.unavailableReasonInfo = unavailableReasonInfo
+        self.dictionaryRepresentation = dictionaryRepresentation
         self.reason = reason
         self.title = title
         self._description = _description
