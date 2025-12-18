@@ -145,9 +145,7 @@ class MockReaderInfo: NSObject, ReaderInfo {
     var serialNumber: String?
     var model: ReaderModel
     var supportedInputMethods: CardInputMethods
-    var connectionInfo: ReaderConnectionInfo
     var firmwareInfo: ReaderFirmwareInfo?
-    var state: ReaderState
     var statusInfo: ReaderStatusInfo
     var batteryStatus: ReaderBatteryStatus?
     var isBlinkable: Bool
@@ -162,9 +160,7 @@ class MockReaderInfo: NSObject, ReaderInfo {
         serialNumber: String? = nil,
         model: ReaderModel = .contactlessAndChip,
         supportedInputMethods: CardInputMethods = .init([.contactless, .chip]),
-        connectionInfo: ReaderConnectionInfo = MockReaderConnectionInfo(),
         firmwareInfo: ReaderFirmwareInfo? = nil,
-        state: ReaderState = .ready,
         statusInfo: ReaderStatusInfo = MockReaderStatusInfo(),
         batteryStatus: ReaderBatteryStatus? = nil,
         isBlinkable: Bool = true,
@@ -178,9 +174,7 @@ class MockReaderInfo: NSObject, ReaderInfo {
         self.serialNumber = serialNumber
         self.model = model
         self.supportedInputMethods = supportedInputMethods
-        self.connectionInfo = connectionInfo
         self.firmwareInfo = firmwareInfo
-        self.state = state
         self.statusInfo = statusInfo
         self.batteryStatus = batteryStatus
         self.isBlinkable = isBlinkable
@@ -188,19 +182,6 @@ class MockReaderInfo: NSObject, ReaderInfo {
         self.isConnectionRetryable = isConnectionRetryable
         self.isRebootable = isRebootable
         self.cardInsertionStatus = cardInsertionStatus
-    }
-}
-
-class MockReaderConnectionInfo: NSObject, ReaderConnectionInfo {
-    let state: ReaderConnectionState
-    let failureInfo: ReaderConnectionFailureInfo?
-
-    init(
-        state: ReaderConnectionState = .connected,
-        failureInfo: ReaderConnectionFailureInfo? = nil
-    ) {
-        self.state = state
-        self.failureInfo = failureInfo
     }
 }
 

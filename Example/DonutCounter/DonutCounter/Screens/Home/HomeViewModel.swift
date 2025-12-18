@@ -51,8 +51,6 @@ import MockReaderUI
                 .notAuthorized,
                 .timedOut:
             print(error)
-        case .idempotencyKeyReused:
-            print("Developer error: Idempotency key reused. Check the most recent payments to see their status.")
         case .paymentAttemptIdReused:
             print("Developer error: Payment attempt ID reused. Check the most recent payments to see their status.")
         default:
