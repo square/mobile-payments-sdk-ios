@@ -39,9 +39,10 @@ struct PermissionsRow: View {
                 .frame(width: 20, height: 20)
                 .foregroundColor(Color.Permissions.iconColor)
                 .padding(.leading, 16)
-                .onTapGesture {
-                    tapAction?()
-                }
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            tapAction?()
         }
         .padding(.bottom, 15)
     }

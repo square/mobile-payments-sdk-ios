@@ -33,8 +33,16 @@ import SwiftUI
     // MARK: - Request Permissions
     
     func requestBluetooth() {
-        guard CBManager.authorization == .notDetermined else { return }
-        bluetoothManager = CBCentralManager(delegate: self, queue: .main)
+        switch CBManager.authorization {
+        case .notDetermined:
+            bluetoothManager = CBCentralManager(delegate: self, queue: .main)
+        case .denied, .restricted:
+            openAppSettings()
+        case .allowedAlways:
+            print("Bluetooth has already been authorized.")
+        @unknown default:
+            fatalError("Invalid Bluetooth permission status")
+        }
     }
     
     func requestLocation() {
