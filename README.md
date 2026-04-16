@@ -1,5 +1,6 @@
 [![CocoaPods](https://img.shields.io/cocoapods/v/SquareMobilePaymentsSDK)](https://github.com/CocoaPods/CocoaPods)
 [![Swift Package Manager compatible](https://img.shields.io/badge/Swift%20Package%20Manager-compatible-4BC51D.svg?style=flat)](https://github.com/apple/swift-package-manager)
+[![Latest version](https://img.shields.io/badge/latest-2.5.0-blue)](https://github.com/square/mobile-payments-sdk-ios/releases)
 
 # Square Mobile Payments SDK
 
