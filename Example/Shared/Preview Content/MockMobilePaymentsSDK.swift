@@ -100,18 +100,20 @@ class MockReadCardInfoManager: NSObject, ReadCardInfoManager {
 
 class MockReaderManager: NSObject, ReaderManager {
     var tapToPaySettings: TapToPaySettings
-    
+    var readerSettings: ReaderSettings
     var readers: [ReaderInfo]
     var isPairingInProgress: Bool
 
     init(
         readers: [ReaderInfo] = [MockReaderInfo()],
         isPairingInProgress: Bool = false,
-        tapToPaySettings: TapToPaySettings = MockTapToPaySettings()
+        tapToPaySettings: TapToPaySettings = MockTapToPaySettings(),
+        readerSettings: ReaderSettings = MockReaderSettings()
     ) {
         self.readers = readers
         self.isPairingInProgress = isPairingInProgress
         self.tapToPaySettings = tapToPaySettings
+        self.readerSettings = readerSettings
     }
 
     func startPairing(with delegate: ReaderPairingDelegate) -> PairingHandle? { nil }
@@ -121,7 +123,7 @@ class MockReaderManager: NSObject, ReaderManager {
     func isTapToPayReaderSupported() -> Bool { true }
     func forget(_ readerInfo: ReaderInfo) { }
     func blink(_ readerInfo: ReaderInfo) { }
-    func retryConnection(_ readerInfo: ReaderInfo) { }
+    func retryConnection(_ readerInfo: ReaderInfo) -> RetryConnectionResult { .startingReconnection }
     func rebootReader(_ readerInfo: ReaderInfo) { }
     func add(_ readerObserver: ReaderObserver) { }
     func remove(_ readerObserver: ReaderObserver) { }
@@ -139,6 +141,35 @@ class MockTapToPaySettings: NSObject, TapToPaySettings {
     func relinkAppleAccount(completion: @escaping ((any Error)?) -> Void) { }
 }
 
+class MockReaderSettings: NSObject, ReaderSettings {
+    var readerSettingsObservers: [any ReaderSettingsObserver] = []
+
+    var preferredFirmwareUpdateTime: TimeOfDay? {
+        didSet {
+            readerSettingsObservers.forEach { $0.readerSettingsDidChange() }
+        }
+    }
+    
+    var reducedChargingModeEnabled: Bool {
+        didSet {
+            readerSettingsObservers.forEach { $0.readerSettingsDidChange() }
+        }
+    }
+
+    init(preferredFirmwareUpdateTime: TimeOfDay? = nil, reducedChargingModeEnabled: Bool = false) {
+        self.preferredFirmwareUpdateTime = preferredFirmwareUpdateTime
+        self.reducedChargingModeEnabled = reducedChargingModeEnabled
+    }
+    
+    func add(_ readerSettingsObserver: any ReaderSettingsObserver) {
+        readerSettingsObservers.append(readerSettingsObserver)
+    }
+    
+    func remove(_ readerSettingsObserver: any ReaderSettingsObserver) {
+        readerSettingsObservers.removeAll { $0 === readerSettingsObserver }
+    }
+}
+
 class MockReaderInfo: NSObject, ReaderInfo {
     var id: UInt
     var name: String
@@ -153,6 +184,7 @@ class MockReaderInfo: NSObject, ReaderInfo {
     var isConnectionRetryable: Bool
     var isRebootable: Bool
     var cardInsertionStatus: CardInsertionStatus
+    var connectionType: ReaderConnectionType
 
     init(
         id: UInt = 1,
@@ -167,7 +199,8 @@ class MockReaderInfo: NSObject, ReaderInfo {
         isForgettable: Bool = true,
         isConnectionRetryable: Bool = false,
         isRebootable: Bool = false,
-        cardInsertionStatus: CardInsertionStatus = .notInserted
+        cardInsertionStatus: CardInsertionStatus = .notInserted,
+        connectionType: ReaderConnectionType = .bluetooth
     ) {
         self.id = id
         self.name = name
@@ -182,6 +215,7 @@ class MockReaderInfo: NSObject, ReaderInfo {
         self.isConnectionRetryable = isConnectionRetryable
         self.isRebootable = isRebootable
         self.cardInsertionStatus = cardInsertionStatus
+        self.connectionType = connectionType
     }
 }
 
@@ -211,6 +245,13 @@ class MockReaderStatusInfo: NSObject, ReaderStatusInfo {
 }
 
 class MockSettingsManager: NSObject, SettingsManager {
+    var isSettingsPresented: Bool = false
+    
+    func dismissSettings() -> Bool {
+        isSettingsPresented = false
+        return true
+    }
+
     let sdkSettings: SDKSettings
     let paymentSettings: PaymentSettings
     let trackingConsentState: TrackingConsentState
