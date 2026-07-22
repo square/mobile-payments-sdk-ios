@@ -15,13 +15,13 @@ let package = Package(
     targets: [
         .binaryTarget(
             name: "SquareMobilePaymentsSDK",
-            url: "https://d3eygymyzkbhx3.cloudfront.net/mpsdk/2.5.0/SquareMobilePaymentsSDK_5b3a1df39f0a.zip",
-            checksum: "109737f24088707bb4b7ede4d0281a912255b5fd2717291b85a06d505117d70f"
+            url: "https://d3eygymyzkbhx3.cloudfront.net/mpsdk/2.6.0/SquareMobilePaymentsSDK_ea5acbd68dbc.zip",
+            checksum: "d4b654a7929229575bcc1a6bbd416404f867093e9a80288e556db85ee6abf106"
         ),
         .binaryTarget(
             name: "MockReaderUI",
-            url: "https://d3eygymyzkbhx3.cloudfront.net/mpsdk/2.5.0/MockReaderUI_5b3a1df39f0a.zip",
-            checksum: "2136835f8f0a6cdd95c90ff85c50bfdf11ae3dd7f58a9361dc2c7691f0488e7a"
+            url: "https://d3eygymyzkbhx3.cloudfront.net/mpsdk/2.6.0/MockReaderUI_ea5acbd68dbc.zip",
+            checksum: "77ed59cdcbc3ae83c64160ef7875388bd26a7e0804bd8fcb76462c0713e19ffe"
         ),
     ]
 )
