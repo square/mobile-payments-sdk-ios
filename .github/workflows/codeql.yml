@@ -1,0 +1,6 @@
+strategy:
+  fail-fast: false
+  matrix:
+    # Override automatic language detection by changing the list below.
+    # Supported options are listed in a comment in the default workflow.
+    language: ['swift', 'javascript-typescript']
