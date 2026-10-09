@@ -3,7 +3,7 @@
 Guidance for coding agents **integrating the Mobile Payments SDK into an iOS app**.
 This repo distributes the SDK as binary frameworks and ships the Donut Counter sample in `Example/`.
 
-Current SDK version: **2.6.0**.
+Current SDK version: **2.7.0**.
 
 ## Dependencies
 
@@ -11,15 +11,15 @@ Two products: `SquareMobilePaymentsSDK` (required) and `MockReaderUI` (Sandbox t
 
 ### Swift Package Manager
 
-Package URL `https://github.com/square/mobile-payments-sdk-ios`, dependency rule **Exact Version `2.6.0`**. Add `SquareMobilePaymentsSDK` to your app target; add `MockReaderUI` too if you need mock readers.
+Package URL `https://github.com/square/mobile-payments-sdk-ios`, dependency rule **Exact Version `2.7.0`**. Add `SquareMobilePaymentsSDK` to your app target; add `MockReaderUI` too if you need mock readers.
 
 ### CocoaPods
 
 ```ruby
 use_frameworks!
 
-pod "SquareMobilePaymentsSDK", "~> 2.6.0"
-pod "MockReaderUI", "~> 2.6.0", configurations: ['Debug']
+pod "SquareMobilePaymentsSDK", "~> 2.7.0"
+pod "MockReaderUI", "~> 2.7.0", configurations: ['Debug']
 ```
 
 `MockReaderUI` requires `SquareMobilePaymentsSDK` to be present as well.
@@ -39,7 +39,7 @@ fi
 
 This is the most commonly missed step. If the SDK misbehaves at launch in an otherwise correct integration, check for this phase and its ordering first.
 
-**Deployment target.** The package and both podspecs declare a minimum of **iOS 16.0**. Square's documentation recommends 17.1 or later, and the sample app in this repo builds against 17.2. Below 16.0 the dependency will not resolve at all.
+**Deployment target.** The package and both podspecs declare a minimum of **iOS 17.1**. Below 17.1 the dependency will not resolve at all. Apps that still support iOS 16 must stay on 2.6.x.
 
 **Never ship `MockReaderUI` in a release build.** It is a debug/Sandbox tool. With CocoaPods, `configurations: ['Debug']` handles this. With SPM there is no Debug-only dependency, so you must remove the product from the target (or strip the framework) before archiving.
 
@@ -163,7 +163,7 @@ DocC archives for both frameworks ship in [Docs/MobilePaymentsSDK_DocC.zip](Docs
 ## Repo layout
 
 ```
-Package.swift                   SPM binary targets, iOS 16.0 platform, version pins
+Package.swift                   SPM binary targets, iOS 17.1 platform, version pins
 SquareMobilePaymentsSDK.podspec / MockReaderUI.podspec
 Docs/                           DocC archives
 Example/
