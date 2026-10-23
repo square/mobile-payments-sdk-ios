@@ -156,9 +156,20 @@ class MockReaderSettings: NSObject, ReaderSettings {
         }
     }
 
-    init(preferredFirmwareUpdateTime: TimeOfDay? = nil, reducedChargingModeEnabled: Bool = false) {
+    var usbPowerMode: PowerMode {
+        didSet {
+            readerSettingsObservers.forEach { $0.readerSettingsDidChange() }
+        }
+    }
+
+    init(
+        preferredFirmwareUpdateTime: TimeOfDay? = nil,
+        reducedChargingModeEnabled: Bool = false,
+        usbPowerMode: PowerMode = .default
+    ) {
         self.preferredFirmwareUpdateTime = preferredFirmwareUpdateTime
         self.reducedChargingModeEnabled = reducedChargingModeEnabled
+        self.usbPowerMode = usbPowerMode
     }
     
     func add(_ readerSettingsObserver: any ReaderSettingsObserver) {
@@ -185,6 +196,7 @@ class MockReaderInfo: NSObject, ReaderInfo {
     var isRebootable: Bool
     var cardInsertionStatus: CardInsertionStatus
     var connectionType: ReaderConnectionType
+    let warnings: ReaderWarnings = ReaderWarnings()
 
     init(
         id: UInt = 1,
@@ -275,18 +287,20 @@ class MockSettingsManager: NSObject, SettingsManager {
 }
 
 class MockSDKSettings: NSObject, SDKSettings {
-    
     let environment: Environment
     let version: String
+    let mpocVersion: String
     let securityComplianceVersion: String
 
     init(
         environment: Environment = .sandbox,
         version: String = "1",
+        mpocVersion: String = "1.1",
         securityComplianceVersion: String = "1"
     ) {
         self.environment = environment
         self.version = version
+        self.mpocVersion = mpocVersion
         self.securityComplianceVersion = securityComplianceVersion
     }
 }

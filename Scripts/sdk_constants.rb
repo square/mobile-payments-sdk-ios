@@ -1,6 +1,6 @@
 module SquareMobilePaymentsSDK
-  VERSION = '2.6.0'
-  COMMIT_SHA = 'ea5acbd68dbc'
+  VERSION = '2.7.0'
+  COMMIT_SHA = 'acc3b681b19a'
   CLOUDFRONT_DOMAIN = 'd3eygymyzkbhx3.cloudfront.net'
   LICENSE_TYPE = 'Square Developer License'
   LICENSE_TEXT = <<-LICENSE
@@ -23,5 +23,5 @@ THE SOFTWARE.
   # Since this is a binary pod, redirect the Cocoapods.org entry to the github repo.
   HOMEPAGE_URL = 'https://github.com/square/mobile-payments-sdk-ios'
   AUTHORS = 'Square'
-  IOS_DEPLOYMENT_TARGET = '16.0'
+  IOS_DEPLOYMENT_TARGET = '17.1'
 end
