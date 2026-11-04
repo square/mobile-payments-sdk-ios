@@ -15,7 +15,7 @@ Copy `Shared/MPoCLabCredentials.example.plist` to `Shared/MPoCLabCredentials.pli
 
 The build bundles this local file so the lab can sign in through the existing Permissions screen. Keep actual credentials and the resulting app artifacts out of version control. This single-account credential setup is for the lab build; a production integration should obtain authorization through its backend.
 
-The project uses a dedicated bundle ID, `com.squareup.mpoclab.au2026`, and the Block App Store team. Distribution requires the corresponding app record, provisioning profile, and signing process. The archive phase rejects missing credentials, a non-production application ID, a location mismatch, or a skipped SDK setup script.
+The project uses the confirmed App Store Connect app **Donut Counter MPSDK Sample App** (Apple ID `6751421366`), bundle ID `com.squareup.mpsdk.DonutCounter`, and Block App Store team `EYF346PHUG`. Its App Store provisioning profile is named `Donut Counter`. Distribution still requires the matching signing identity and upload authentication. The archive phase rejects missing credentials, a non-production application ID, a location mismatch, or a skipped SDK setup script.
 
 ## Verification
 
