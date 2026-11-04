@@ -192,7 +192,7 @@ struct PermissionsView: View {
         guard let accessToken = Config.accessToken,
               let locationId = Config.locationID
         else {
-            fatalError("Replace the values in Config.swift with values from your Square account")
+            fatalError("Configure Example/Shared/MPoCLabCredentials.plist before authorizing the lab app")
         }
         
         mobilePaymentsSDK.authorizationManager.authorize(

@@ -9,6 +9,8 @@ import MockReaderUI
 @Observable class HomeViewModel: PaymentManagerDelegate {
 
     var authorizationState: AuthorizationState
+    var lastPaymentResult: String?
+    var offlineQueueSummary = ""
 
     let mobilePaymentsSDK: SDKManager
     let settingsManager: SettingsManager
@@ -33,10 +35,11 @@ import MockReaderUI
     ) {
         // https://developer.squareup.com/docs/mobile-payments-sdk/ios/take-payments#overview
         if let onlinePayment = payment as? OnlinePayment {
-            print("Finished online payment with ID: \(onlinePayment.id!) status: \(onlinePayment.status.description)")
+            lastPaymentResult = String(format: NSLocalizedString("Online payment: %@", comment: "Online payment result"), onlinePayment.status.description)
         } else if let offlinePayment = payment as? OfflinePayment {
-            print("Finished offline payment with ID: \(offlinePayment.localID) status: \(offlinePayment.status.description)")
+            lastPaymentResult = String(format: NSLocalizedString("Offline payment: %@\nLocal ID: %@", comment: "Stored offline payment result"), offlinePayment.status.description, offlinePayment.localID)
         }
+        refreshOfflineQueue()
     }
 
     func paymentManager(
@@ -45,24 +48,37 @@ import MockReaderUI
         withError error: Error
     ) {
         // https://developer.squareup.com/docs/mobile-payments-sdk/ios/handling-errors#payment-errors
-        let paymentError = PaymentError(rawValue: (error as NSError).code)
-        switch paymentError {
-        case .paymentAlreadyInProgress,
-                .notAuthorized,
-                .timedOut:
-            print(error)
-        case .paymentAttemptIdReused:
-            print("Developer error: Payment attempt ID reused. Check the most recent payments to see their status.")
-        default:
-            print(error)
-        }
+        lastPaymentResult = String(format: NSLocalizedString("Payment failed: %@", comment: "Payment error"), error.localizedDescription)
+        refreshOfflineQueue()
     }
 
     func paymentManager(
         _ paymentManager: PaymentManager,
         didCancel payment: Payment
     ) {
-        print("\(#function)")
+        lastPaymentResult = NSLocalizedString("Payment canceled", comment: "Canceled payment result")
+        refreshOfflineQueue()
+    }
+
+    func refreshOfflineQueue() {
+        guard authorizationState == .authorized else {
+            offlineQueueSummary = ""
+            return
+        }
+        let allowance = settingsManager.paymentSettings.isOfflineProcessingAllowed
+            ? NSLocalizedString("Offline payments enabled", comment: "Offline eligibility")
+            : NSLocalizedString("Offline payments not enabled", comment: "Offline eligibility")
+        mobilePaymentsSDK.paymentManager.offlinePaymentQueue.getPayments { [weak self] payments, error in
+            Task { @MainActor [weak self] in
+                guard let self, self.authorizationState == .authorized else { return }
+                if let error {
+                    self.offlineQueueSummary = allowance + "\n" + error.localizedDescription
+                } else {
+                    let rows = payments.map { "\($0.localID): \($0.status.description)" }
+                    self.offlineQueueSummary = ([allowance, String(format: NSLocalizedString("Offline queue records: %ld", comment: "Number of stored offline payment records"), payments.count)] + rows).joined(separator: "\n")
+                }
+            }
+        }
     }
     
     private func refreshAuthorizationState() {

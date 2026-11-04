@@ -54,3 +54,58 @@
 
 /* Deauthorization button title */
 "Sign out" = "Sign out";
+
+/* VoiceOver description of the payment amount, including currency */
+"Amount: %@" = "Amount: %@";
+
+/* Automatically select online or offline processing */
+"Automatic" = "Automatic";
+
+/* Payment button with formatted money */
+"Charge %@" = "Charge %@";
+
+/* Clear the entire payment amount entered on the keypad */
+"Clear amount" = "Clear amount";
+
+/* VoiceOver label for the amount keypad backspace button */
+"Delete last digit" = "Delete last digit";
+
+/* Payment button when no amount has been entered
+   Payment button with formatted money */
+"Enter an amount" = "Enter an amount";
+
+/* Title of the Australian MPoC lab test app */
+"MPoC Lab · Australia" = "MPoC Lab · Australia";
+
+/* Offline-only payment processing */
+"Offline" = "Offline";
+
+/* Stored offline payment result */
+"Offline payment: %@\nLocal ID: %@" = "Offline payment: %1$@\nLocal ID: %2$@";
+
+/* Offline eligibility */
+"Offline payments enabled" = "Offline payments enabled";
+
+/* Offline eligibility */
+"Offline payments not enabled" = "Offline payments not enabled";
+
+/* Number of stored offline payment records */
+"Offline queue records: %ld" = "Offline queue records: %ld";
+
+/* Online-only payment processing */
+"Online" = "Online";
+
+/* Online payment result */
+"Online payment: %@" = "Online payment: %@";
+
+/* Canceled payment result */
+"Payment canceled" = "Payment canceled";
+
+/* Payment error */
+"Payment failed: %@" = "Payment failed: %@";
+
+/* Label for selecting automatic, online-only or offline-only payments */
+"Payment processing" = "Payment processing";
+
+/* Refresh the stored offline payment records and their current upload status */
+"Refresh offline payments" = "Refresh offline payments";

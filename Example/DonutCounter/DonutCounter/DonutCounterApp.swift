@@ -10,7 +10,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
         guard let applicationId = Config.squareApplicationID else {
-            fatalError("Replace the values in Config.swift with values from your Square account")
+            fatalError("Configure Example/Shared/MPoCLabCredentials.plist before running the lab app")
         }
         MobilePaymentsSDK.initialize(squareApplicationID: applicationId)
         self.mobilePaymentSDK = MobilePaymentsSDK.shared

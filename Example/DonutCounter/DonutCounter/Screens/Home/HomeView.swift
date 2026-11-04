@@ -8,10 +8,8 @@ import MockReaderUI
 struct HomeView: View {
     
     private enum Constants {
-        static let headerViewBottomPadding: CGFloat = 50
-        static let donutImageWidth: CGFloat = 248
-        static let donutImageBottomPadding: CGFloat = 50
-        static let appNameTextBottomPadding: CGFloat = 32
+        static let headerViewBottomPadding: CGFloat = 12
+        static let appNameTextBottomPadding: CGFloat = 16
         static let authorizationStatusTextTopPadding: CGFloat = 10
         static let iPadPadding: CGFloat = 50
     }
@@ -21,6 +19,9 @@ struct HomeView: View {
     @State private var presentingPermissionsView: Bool = false
     @State private var isMockReaderPresented: Bool = false
     @State private var viewModel: HomeViewModel
+    @State private var enteredAmount = MoneyAmountEntry()
+    @State private var selectedProcessingMode = LabProcessingMode.automatic
+    @SwiftUI.Environment(\.scenePhase) private var scenePhase
     
     private var mobilePaymentsSDK: SDKManager { viewModel.mobilePaymentsSDK }
     private var isIPad: Bool {
@@ -54,11 +55,16 @@ struct HomeView: View {
         .padding([.leading, .trailing], isIPad ? Constants.iPadPadding : nil)
         .padding([.top, .bottom])
         .background(Color.white)
+        .onAppear { viewModel.refreshOfflineQueue() }
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .active { viewModel.refreshOfflineQueue() }
+        }
         .onChange(of: viewModel.authorizationState) { oldValue, newValue in
             if newValue == .notAuthorized {
                 // Mock reader is required to be in an authorized sandbox environment
                 dismissMockReader()
             }
+            viewModel.refreshOfflineQueue()
         }
     }
     
@@ -74,28 +80,42 @@ struct HomeView: View {
     }
 
     private var contentView: some View {
-        VStack {
-            Image("donut")
-                .resizable()
-                .aspectRatio(1.0, contentMode: .fit)
-                .frame(width: Constants.donutImageWidth)
-                .padding(.bottom, Constants.donutImageBottomPadding)
-            Text(String.Home.appTitle)
-                .font(.title)
-                .fontWeight(.bold)
-                .foregroundColor(.black)
-                .padding([.bottom], Constants.appNameTextBottomPadding)
-            buyDonutButton
-                .buttonStyle(BuyButtonStyle())
-                .font(.body)
-                .fontWeight(.semibold)
-            if viewModel.authorizationState != .authorized {
-                Text(String.Home.notAuthorized)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .multilineTextAlignment(.leading)
-                    .font(.subheadline)
-                    .foregroundStyle(Color.Text.warning)
-                    .padding(.top, Constants.authorizationStatusTextTopPadding)
+        ScrollView {
+            VStack(spacing: 16) {
+                Text(NSLocalizedString("MPoC Lab · Australia", comment: "Title of the Australian MPoC lab test app"))
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding([.bottom], Constants.appNameTextBottomPadding)
+                MoneyKeypadView(amount: $enteredAmount)
+                Picker(NSLocalizedString("Payment processing", comment: "Label for selecting automatic, online-only or offline-only payments"), selection: $selectedProcessingMode) {
+                    ForEach(LabProcessingMode.allCases) { mode in
+                        Text(mode.title).tag(mode)
+                    }
+                }
+                .pickerStyle(.segmented)
+                buyDonutButton
+                    .buttonStyle(BuyButtonStyle())
+                    .font(.body)
+                    .fontWeight(.semibold)
+                if viewModel.authorizationState != .authorized {
+                    Text(String.Home.notAuthorized)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .multilineTextAlignment(.leading)
+                        .font(.subheadline)
+                        .foregroundStyle(Color.Text.warning)
+                        .padding(.top, Constants.authorizationStatusTextTopPadding)
+                }
+                if let result = viewModel.lastPaymentResult {
+                    Text(result)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .accessibilityIdentifier("paymentResult")
+                }
+                if viewModel.authorizationState == .authorized {
+                    Text(viewModel.offlineQueueSummary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .accessibilityIdentifier("offlineQueueSummary")
+                    Button(NSLocalizedString("Refresh offline payments", comment: "Refresh the stored offline payment records and their current upload status")) { viewModel.refreshOfflineQueue() }
+                }
             }
         }
     }
@@ -147,6 +167,8 @@ struct HomeView: View {
     private var buyDonutButton: some View {
         Button(
             action: {
+                guard let amount = enteredAmount.payableAmount else { return }
+                viewModel.lastPaymentResult = nil
                 // Generate a paymentAttemptID to be used for this payment.
                 // Your actual implementation should not be as simple as generating a UUID before
                 // starting the payment. The ID should be generated based on some type of order/sales ID
@@ -158,8 +180,8 @@ struct HomeView: View {
                 let paymentParameters = PaymentParameters(
                     paymentAttemptID: paymentAttemptID,
                     amountMoney: Money(
-                        amount: 100,
-                        currency: .USD
+                        amount: amount,
+                        currency: .AUD
                     ),
                     processingMode: processingMode()
                 )
@@ -167,7 +189,7 @@ struct HomeView: View {
                 // https://square.github.io/mobile-payments-sdk-ios/docs/documentation/mobilepaymentssdkapi/promptparameters#instance-properties
                 let promptParameters = PromptParameters(
                     mode: .default,
-                    additionalMethods: .all
+                    additionalMethods: selectedProcessingMode == .offline ? AdditionalPaymentMethods([]) : .keyed
                 )
 
                 // https://developer.squareup.com/docs/mobile-payments-sdk/ios/take-payments
@@ -178,9 +200,13 @@ struct HomeView: View {
                     delegate: viewModel
                 )
             },
-            label: { Text(String.Home.buyDonutButtonTitle) }
+            label: {
+                Text(enteredAmount.payableAmount == nil
+                    ? NSLocalizedString("Enter an amount", comment: "Payment button when no amount has been entered")
+                    : String(format: NSLocalizedString("Charge %@", comment: "Payment button with formatted money"), enteredAmount.formattedAmount))
+            }
         )
-        .disabled(viewModel.authorizationState != .authorized)
+        .disabled(viewModel.authorizationState != .authorized || enteredAmount.payableAmount == nil)
     }
     
     private var mockReaderButton: some View {
@@ -237,7 +263,29 @@ struct HomeView: View {
         if viewModel.settingsManager.sdkSettings.environment == .sandbox {
             return .onlineOnly
         }
-        return .autoDetect
+        return selectedProcessingMode.sdkMode
+    }
+}
+
+private enum LabProcessingMode: String, CaseIterable, Identifiable {
+    case automatic, online, offline
+
+    var id: Self { self }
+
+    var title: String {
+        switch self {
+        case .automatic: NSLocalizedString("Automatic", comment: "Automatically select online or offline processing")
+        case .online: NSLocalizedString("Online", comment: "Online-only payment processing")
+        case .offline: NSLocalizedString("Offline", comment: "Offline-only payment processing")
+        }
+    }
+
+    var sdkMode: ProcessingMode {
+        switch self {
+        case .automatic: .autoDetect
+        case .online: .onlineOnly
+        case .offline: .offlineOnly
+        }
     }
 }
 

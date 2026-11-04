@@ -1,8 +1,18 @@
-public enum Config {
-    static let squareApplicationID: String? = nil // Replace with your squareApplicationID
+import Foundation
 
-    // In a production application you should use your server to obtain an access token and locationID.
-    // For this sample app, we can just authorize Square Mobile Payments SDK using hardcoded values.
-    static let accessToken: String? = nil // Replace with your accessToken
-    static let locationID: String? = nil // Replace with your locationID
+public enum Config {
+    private static let labCredentials: [String: String] = {
+        guard let url = Bundle.main.url(forResource: "MPoCLabCredentials", withExtension: "plist"),
+              let data = try? Data(contentsOf: url),
+              let values = try? PropertyListSerialization.propertyList(from: data, format: nil) as? [String: String]
+        else { return [:] }
+        return values.filter { !$0.value.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
+    }()
+
+    static let squareApplicationID: String? = labCredentials["squareApplicationID"]
+
+    // The lab's single-account build must authorize without a separate login service.
+    // Keep these credentials in the ignored local plist rather than in version control.
+    static let accessToken: String? = labCredentials["accessToken"]
+    static let locationID: String? = labCredentials["locationID"]
 }

@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A20261103000000000000004 /* MoneyKeypadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20261103000000000000003 /* MoneyKeypadView.swift */; };
+		A20261103000000000000002 /* MoneyAmountEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20261103000000000000001 /* MoneyAmountEntry.swift */; };
 		3754DA322E4FD2F90093C7F6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3754DA312E4FD2F90093C7F6 /* Localizable.strings */; };
 		D09D322D2CE442F9002DB265 /* Payment+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09D322C2CE442F9002DB265 /* Payment+Extensions.swift */; };
 		D09D322F2CE445C4002DB265 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D09D322E2CE445C4002DB265 /* String+Extensions.swift */; };
 		D0D5BB652CDD75F20054771D /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D5BB642CDD75F20054771D /* Color+Extensions.swift */; };
-		D0D89F202CE5AFF700FDD0B8 /* MockReaderUI in Frameworks */ = {isa = PBXBuildFile; productRef = D0D89F1F2CE5AFF700FDD0B8 /* MockReaderUI */; };
 		D0D89F222CE5AFF700FDD0B8 /* SquareMobilePaymentsSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D0D89F212CE5AFF700FDD0B8 /* SquareMobilePaymentsSDK */; };
 		D0F1F9242CDEA4DC00E00BB6 /* PermissionRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0F1F9232CDEA4DC00E00BB6 /* PermissionRow.swift */; };
 		FB1E68D22C1CC55C004DC0A9 /* DonutCounterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1E68C32C1CC55C004DC0A9 /* DonutCounterApp.swift */; };
@@ -29,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A20261103000000000000003 /* MoneyKeypadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyKeypadView.swift; sourceTree = "<group>"; };
+		A20261103000000000000001 /* MoneyAmountEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyAmountEntry.swift; sourceTree = "<group>"; };
 		3754DA302E4FD2F90093C7F6 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3754DA332E4FD2FB0093C7F6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3754DA342E4FD2FB0093C7F6 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -58,7 +61,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D0D89F202CE5AFF700FDD0B8 /* MockReaderUI in Frameworks */,
 				D0D89F222CE5AFF700FDD0B8 /* SquareMobilePaymentsSDK in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,6 +129,8 @@
 		FB1E68C42C1CC55C004DC0A9 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				A20261103000000000000001 /* MoneyAmountEntry.swift */,
+				A20261103000000000000003 /* MoneyKeypadView.swift */,
 				FB1E68C52C1CC55C004DC0A9 /* MobilePaymentsSDKViewHolder.swift */,
 				FB1E68C62C1CC55C004DC0A9 /* AppButtons.swift */,
 			);
@@ -182,6 +186,7 @@
 				FB1E68A92C1CC50A004DC0A9 /* Sources */,
 				FB1E68AA2C1CC50A004DC0A9 /* Frameworks */,
 				FB1E68AB2C1CC50A004DC0A9 /* Resources */,
+				A20261103000000000000005 /* Lab credentials */,
 				FB1E68EC2C1CC5FB004DC0A9 /* ShellScript */,
 			);
 			buildRules = (
@@ -190,7 +195,6 @@
 			);
 			name = DonutCounter;
 			packageProductDependencies = (
-				D0D89F1F2CE5AFF700FDD0B8 /* MockReaderUI */,
 				D0D89F212CE5AFF700FDD0B8 /* SquareMobilePaymentsSDK */,
 			);
 			productName = MobilePaymentsSwiftUIExample;
@@ -252,6 +256,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		A20261103000000000000005 /* Lab credentials */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = ();
+			name = "Lab credentials";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/../../Scripts/prepare-mpoc-lab-credentials.sh\"\n";
+		};
+
 		FB1E68EC2C1CC5FB004DC0A9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -278,6 +293,8 @@
 			files = (
 				FB1E68D22C1CC55C004DC0A9 /* DonutCounterApp.swift in Sources */,
 				D09D322F2CE445C4002DB265 /* String+Extensions.swift in Sources */,
+				A20261103000000000000002 /* MoneyAmountEntry.swift in Sources */,
+				A20261103000000000000004 /* MoneyKeypadView.swift in Sources */,
 				FB1E68D32C1CC55C004DC0A9 /* MobilePaymentsSDKViewHolder.swift in Sources */,
 				FB1E68D62C1CC55C004DC0A9 /* HomeView.swift in Sources */,
 				FB1E68EB2C1CC5E8004DC0A9 /* MockMobilePaymentsSDK.swift in Sources */,
@@ -439,12 +456,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"../Shared/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = EYF346PHUG;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ../Shared/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Donut Counter";
+				INFOPLIST_KEY_CFBundleDisplayName = "MPoC Lab AU";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Square uses Bluetooth to connect and communicate with Square readers and compatible accessories.\n";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Square uses location to know where transactions take place to reduce risk and minimize payment disputes.\n";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Square Reader for magstripe uses the microphone to communicate payment card data to your device.";
@@ -461,7 +478,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.DonutCounter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.mpoclab.au2026;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -479,12 +496,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"../Shared/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = EYF346PHUG;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ../Shared/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Donut Counter";
+				INFOPLIST_KEY_CFBundleDisplayName = "MPoC Lab AU";
 				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Square uses Bluetooth to connect and communicate with Square readers and compatible accessories.\n";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Square uses location to know where transactions take place to reduce risk and minimize payment disputes.\n";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Square Reader for magstripe uses the microphone to communicate payment card data to your device.";
@@ -501,7 +518,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.DonutCounter;
+				PRODUCT_BUNDLE_IDENTIFIER = com.squareup.mpoclab.au2026;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -540,10 +557,6 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D0D89F1F2CE5AFF700FDD0B8 /* MockReaderUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MockReaderUI;
-		};
 		D0D89F212CE5AFF700FDD0B8 /* SquareMobilePaymentsSDK */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = SquareMobilePaymentsSDK;
