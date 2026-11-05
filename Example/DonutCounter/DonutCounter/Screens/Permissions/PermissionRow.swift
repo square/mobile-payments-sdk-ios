@@ -2,48 +2,38 @@ import Foundation
 import SwiftUI
 
 struct PermissionsRow: View {
-    
-    enum PermissionsIcon: String {
-        case deselected = "square"
-        case selected = "checkmark.square"
-    }
-    
     let title: String
     let description: String
     var isPermissionGranted: Bool
     let tapAction: (() -> Void)?
-    
+
     var body: some View {
-        HStack {
-            VStack(
-                alignment: .leading,
-                spacing: 5,
-                content: {
-                    Text(title)
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundStyle(Color.Permissions.titleColor)
-                    
-                    Text(description)
-                        .font(.system(size: 14, weight: .regular))
-                        .lineSpacing(5)
-                        .foregroundStyle(Color.Permissions.descriptionColor)
-                }
-            )
-            .padding(.top, 16)
-            
-            Spacer()
-            
-            Image(systemName: isPermissionGranted ? PermissionsIcon.selected.rawValue : PermissionsIcon.deselected.rawValue)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 20, height: 20)
-                .foregroundColor(Color.Permissions.iconColor)
-                .padding(.leading, 16)
-        }
-        .contentShape(Rectangle())
-        .onTapGesture {
+        Button {
             tapAction?()
+        } label: {
+            HStack {
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(title)
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                    Text(description)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer()
+                Image(systemName: isPermissionGranted ? "checkmark.square" : "square")
+                    .font(.title2)
+                    .foregroundStyle(.primary)
+                    .accessibilityHidden(true)
+            }
+            .padding(.vertical, 12)
+            .contentShape(Rectangle())
         }
-        .padding(.bottom, 15)
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .combine)
+        .accessibilityValue(Text(isPermissionGranted
+            ? NSLocalizedString("Granted", comment: "Permission granted state")
+            : NSLocalizedString("Not granted", comment: "Permission not granted state")))
     }
 }

@@ -16,10 +16,11 @@ struct HomeView: View {
     
     @SwiftUI.Environment(\.horizontalSizeClass) private var horizontalSizeClass
 
-    @State private var presentingPermissionsView: Bool = false
+    @State private var presentingAccountView: Bool = false
     @State private var isMockReaderPresented: Bool = false
     @State private var viewModel: HomeViewModel
-    @State private var enteredAmount = MoneyAmountEntry()
+    @Bindable private var session: AppSession
+    @State private var enteredAmount: MoneyAmountEntry
     @State private var selectedProcessingMode = LabProcessingMode.automatic
     @SwiftUI.Environment(\.scenePhase) private var scenePhase
     
@@ -28,13 +29,19 @@ struct HomeView: View {
         horizontalSizeClass == .regular
     }
     private var isMockReaderAvailable: Bool {
-        viewModel.authorizationState == .authorized && mobilePaymentsSDK.settingsManager.sdkSettings.environment == .sandbox
+        #if canImport(MockReaderUI)
+        return viewModel.authorizationState == .authorized && mobilePaymentsSDK.settingsManager.sdkSettings.environment == .sandbox
+        #else
+        return false
+        #endif
     }
     
     private let viewHolder: MobilePaymentsSDKViewHolder = MobilePaymentsSDKViewHolder()
 
-    init(viewModel: HomeViewModel) {
+    init(viewModel: HomeViewModel, session: AppSession) {
         self.viewModel = viewModel
+        self.session = session
+        _enteredAmount = State(initialValue: MoneyAmountEntry(currencyCode: session.currency.rawValue, locale: .current))
     }
 
     var body: some View {
@@ -56,6 +63,10 @@ struct HomeView: View {
         .padding([.top, .bottom])
         .background(Color.white)
         .onAppear { viewModel.refreshOfflineQueue() }
+        .onChange(of: session.currency) { _, currency in
+            enteredAmount = MoneyAmountEntry(currencyCode: currency.rawValue, locale: .current)
+            viewModel.lastPaymentResult = nil
+        }
         .onChange(of: scenePhase) { _, phase in
             if phase == .active { viewModel.refreshOfflineQueue() }
         }
@@ -74,7 +85,7 @@ struct HomeView: View {
         HStack {
             settingsButton
             Spacer()
-            permissionsButton
+            accountButton
         }
         .padding(.bottom, Constants.headerViewBottomPadding)
     }
@@ -82,11 +93,22 @@ struct HomeView: View {
     private var contentView: some View {
         ScrollView {
             VStack(spacing: 16) {
-                Text(NSLocalizedString("MPoC Lab · Australia", comment: "Title of the Australian MPoC lab test app"))
+                Text("DonutCounter")
                     .font(.title)
                     .fontWeight(.bold)
                     .padding([.bottom], Constants.appNameTextBottomPadding)
+                Picker(NSLocalizedString("Currency", comment: "Payment currency selector"), selection: $session.currency) {
+                    ForEach(TestCurrency.allCases) { currency in
+                        Text(currency.title).tag(currency)
+                    }
+                }
+                .accessibilityIdentifier("paymentCurrency")
                 MoneyKeypadView(amount: $enteredAmount)
+                if !session.currencyMatchesLocation {
+                    Text(String(format: NSLocalizedString("This location accepts %@. Select that currency to take a payment.", comment: "Prevent charging a currency incompatible with the authorized location"), session.locationCurrency?.rawValue ?? NSLocalizedString("an unsupported currency", comment: "Unknown location currency")))
+                        .foregroundStyle(Color.Text.warning)
+                        .accessibilityIdentifier("currencyMismatch")
+                }
                 Picker(NSLocalizedString("Payment processing", comment: "Label for selecting automatic, online-only or offline-only payments"), selection: $selectedProcessingMode) {
                     ForEach(LabProcessingMode.allCases) { mode in
                         Text(mode.title).tag(mode)
@@ -122,21 +144,15 @@ struct HomeView: View {
 
     // MARK: - Buttons
 
-    private var permissionsButton: some View {
+    private var accountButton: some View {
         Button(
-            action: { presentingPermissionsView = true },
+            action: { presentingAccountView = true },
             label: {
-                Text(String.Home.permissionsButtonTitle)
+                Text(NSLocalizedString("Account", comment: "Open credentials, currency, and permissions settings"))
             }
         )
-        .fullScreenCover(isPresented: $presentingPermissionsView, content: {
-            // https://developer.squareup.com/docs/mobile-payments-sdk/ios#privacy-permissions
-            PermissionsView(
-                viewModel: PermissionsViewModel(
-                    mobilePaymentsSDK: mobilePaymentsSDK
-                ),
-                presentingPermissionsView: $presentingPermissionsView
-            )
+        .fullScreenCover(isPresented: $presentingAccountView, content: {
+            AccountView(session: session, canDismiss: true)
         })
         .buttonStyle(HeaderButtonStyle())
     }
@@ -167,7 +183,7 @@ struct HomeView: View {
     private var buyDonutButton: some View {
         Button(
             action: {
-                guard let amount = enteredAmount.payableAmount else { return }
+                guard session.currencyMatchesLocation, let amount = enteredAmount.payableAmount else { return }
                 viewModel.lastPaymentResult = nil
                 // Generate a paymentAttemptID to be used for this payment.
                 // Your actual implementation should not be as simple as generating a UUID before
@@ -181,7 +197,7 @@ struct HomeView: View {
                     paymentAttemptID: paymentAttemptID,
                     amountMoney: Money(
                         amount: amount,
-                        currency: .AUD
+                        currency: session.currency.sdkCurrency
                     ),
                     processingMode: processingMode()
                 )
@@ -206,7 +222,7 @@ struct HomeView: View {
                     : String(format: NSLocalizedString("Charge %@", comment: "Payment button with formatted money"), enteredAmount.formattedAmount))
             }
         )
-        .disabled(viewModel.authorizationState != .authorized || enteredAmount.payableAmount == nil)
+        .disabled(viewModel.authorizationState != .authorized || enteredAmount.payableAmount == nil || !session.currencyMatchesLocation)
     }
     
     private var mockReaderButton: some View {
@@ -287,8 +303,4 @@ private enum LabProcessingMode: String, CaseIterable, Identifiable {
         case .offline: .offlineOnly
         }
     }
-}
-
-#Preview {
-    HomeView(viewModel: HomeViewModel(mobilePaymentsSDK: MockMobilePaymentsSDK()))
 }

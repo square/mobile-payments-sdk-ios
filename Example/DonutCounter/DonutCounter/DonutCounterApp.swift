@@ -1,19 +1,14 @@
 import SwiftUI
 import SquareMobilePaymentsSDK
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-
-    private(set) var mobilePaymentSDK: SDKManager!
+@MainActor class AppDelegate: NSObject, UIApplicationDelegate {
+    let session = AppSession()
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
-        guard let applicationId = Config.squareApplicationID else {
-            fatalError("Configure Example/Shared/MPoCLabCredentials.plist before running the lab app")
-        }
-        MobilePaymentsSDK.initialize(squareApplicationID: applicationId)
-        self.mobilePaymentSDK = MobilePaymentsSDK.shared
+        session.initializeSavedApplication()
         return true
     }
 }
@@ -24,7 +19,14 @@ struct DonutCounterApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeView(viewModel: HomeViewModel(mobilePaymentsSDK: appDelegate.mobilePaymentSDK))
+            if let sdk = appDelegate.session.sdk,
+               appDelegate.session.authorizationState == .authorized,
+               !appDelegate.session.isBusy,
+               !appDelegate.session.requiresRestart {
+                HomeView(viewModel: HomeViewModel(mobilePaymentsSDK: sdk), session: appDelegate.session)
+            } else {
+                AccountView(session: appDelegate.session)
+            }
         }
     }
 }

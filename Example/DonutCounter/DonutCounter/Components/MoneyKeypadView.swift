@@ -26,6 +26,7 @@ struct MoneyKeypadView: View {
                     key(String(digit)) { amount.appendDigit(digit) }
                 }
                 key(".") { amount.appendDecimalSeparator() }
+                    .disabled(!amount.allowsFractionalAmount)
                 key("0") { amount.appendDigit(0) }
                 Button { amount.deleteLastCharacter() } label: {
                     Image(systemName: "delete.left")

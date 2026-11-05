@@ -10,7 +10,7 @@ let package = Package(
             name: "DonutCounterAmount",
             path: "DonutCounter/Components",
             exclude: ["AppButtons.swift", "MobilePaymentsSDKViewHolder.swift", "MoneyKeypadView.swift"],
-            sources: ["MoneyAmountEntry.swift"]
+            sources: ["MoneyAmountEntry.swift", "TestCurrency.swift"]
         ),
         .testTarget(name: "DonutCounterAmountTests", dependencies: ["DonutCounterAmount"], path: "Tests"),
     ]

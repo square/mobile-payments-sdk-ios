@@ -55,9 +55,9 @@ Three values, from the [Developer Console](https://developer.squareup.com/apps).
 
 A Sandbox application ID puts the SDK in Sandbox mode; `settingsManager.sdkSettings.environment` reports it. Moving to production means re-initializing with the production application ID.
 
-In this sample the values live in [Example/Shared/Config.swift](Example/Shared/Config.swift), all three declared `nil`. **Leave them `nil`** — never commit real credential values here or in the user's repo. Tell the user to fill them in locally. The sample deliberately `fatalError`s when they are still `nil`.
+DonutCounter accepts these values in its runtime **Square account** form. Never commit or bundle real credential values. The form retains the access token only in memory while signing in; the SDK manages its own persisted authorization. The app remembers only application ID, location ID, and currency in UserDefaults.
 
-A personal access token is acceptable for Sandbox only. Production authorization must use OAuth, and a shipped app must not embed a personal access token.
+A personal access token is acceptable for Sandbox only. Production authorization must use OAuth. Changing seller credentials deauthorizes the previous SDK session before authorizing again. Changing application ID requires app relaunch because the SDK initializes once per process. See [the sample guide](Example/DonutCounter/README.md).
 
 ## Privacy permissions
 
@@ -100,7 +100,7 @@ MobilePaymentsSDK.shared.authorizationManager.authorize(
 
 Guarding on `state == .notAuthorized` matters: authorizing while already authorized returns an `ALREADY_AUTHORIZED` error.
 
-See [DonutCounterApp.swift](Example/DonutCounter/DonutCounter/DonutCounterApp.swift) and [PermissionsView.swift](Example/DonutCounter/DonutCounter/Screens/Permissions/PermissionsView.swift).
+See [DonutCounterApp.swift](Example/DonutCounter/DonutCounter/DonutCounterApp.swift) and [AppSession.swift](Example/DonutCounter/DonutCounter/AppSession.swift).
 
 ## Taking a payment
 
@@ -167,7 +167,7 @@ Package.swift                   SPM binary targets, iOS 17.1 platform, version p
 SquareMobilePaymentsSDK.podspec / MockReaderUI.podspec
 Docs/                           DocC archives
 Example/
-  Shared/Config.swift           credential placeholders (all nil)
+  DonutCounter/DonutCounter/AppSession.swift  runtime credentials and SDK lifecycle
   Shared/Info.plist             external accessory protocols
   DonutCounter/DonutCounter/
     DonutCounterApp.swift       initialize()
@@ -175,4 +175,4 @@ Example/
     Screens/Home/HomeView.swift startPayment(), settings, MockReaderUI
 ```
 
-Running the sample: fill in `Example/Shared/Config.swift`, open `Example/DonutCounter/DonutCounter.xcodeproj`, select the `DonutCounter` target, run.
+Running the sample: open `Example/DonutCounter/DonutCounter.xcodeproj`, select the `DonutCounter` target, run, and enter credentials in the Square account form. Payment currency must match the authorized location.

@@ -10,8 +10,8 @@ Donut Counter is a sample application for building with the [Square Mobile Payme
 
 | Reference                        | Sample App Project Location                   |
 | -------------------------------- | ----------------------------------------- |
-| ⚡️ Initializing the SDK          | [DonutCounter/DonutCounterApp.swift](./DonutCounter/DonutCounter/DonutCounterApp.swift#L15) |
-| 🔒 Authorizing the SDK           | [DonutCounter/Screens/Permissions/PermissionsView.swift](./DonutCounter/DonutCounter/Screens/Permissions/PermissionsView.swift#L192-L207) |
+| ⚡️ Initializing the SDK          | [DonutCounter/AppSession.swift](./DonutCounter/DonutCounter/AppSession.swift) |
+| 🔒 Authorizing the SDK           | [DonutCounter/AppSession.swift](./DonutCounter/DonutCounter/AppSession.swift) |
 | 💰 Taking a Payment              | [DonutCounter/Screens/Home/HomeView.swift](./DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L155-L182) |
 | ⚙️ Presenting Settings Screen    | [DonutCounter/Screens/Home/HomeView.swift](./DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L128-L136) |
 | 💳 Presenting MockReaderUI       | [DonutCounter/Screens/Home/HomeView.swift](./DonutCounter/DonutCounter/Screens/Home/HomeView.swift#L210-L228) |
@@ -44,7 +44,7 @@ On the application's Credentials page, toggle the environment you'd like to use 
 Click "Locations" in the left navigation and make note of the Default Test Account's **Location ID** as well. These values will be used in the next step.
 
 ## 3. Configure the SDK
-In the [Config.swift](./Shared/Config.swift) file, populate the values for Square application id, access token, and location id you obtained from the previous step.
+Enter the application ID, access token, and location ID in the app's **Square account** form after launch. Credentials are not bundled or committed. The form remembers non-secret identifiers and currency; the SDK manages the authorized session. See the [account and currency guide](./DonutCounter/README.md).
 
 ## 4. Run the app
 1. Open `DonutCounter.xcodeproj` in Xcode
@@ -54,12 +54,12 @@ In the [Config.swift](./Shared/Config.swift) file, populate the values for Squar
 ## 5. Request required permissions
 On the first install of the application, you will be required to grant various device permissions in order for the SDK to be fully functional.
 
-Tap the 'Permissions' button found on the top right of the home view. Tap the empty checkbox next to each permission to grant the specific device permission. The checkbox will update with a checkmark if the proper permission is granted. All permissions must be granted.
+The Square account form lists the required permissions. Tap each permission row to grant access. Granted permissions show a checkmark. You can return to this form using **Account** on the home screen.
 
 <img src="../Images/donut-counter-permissions.png" width="250"/>
 
 ## 6. Authorize the SDK
-Within the Permissions screen, you will find a `Sign In` button. Tap this button to authorize the sdk with the credentials you provided in Step 3. If an issue occurs during authorization, check the Xcode console for a log with the specific authorization error. You will know the SDK is fully authorized when the button updates to `Sign Out` and the text below the button reads `The device is authorized`.
+Tap **Sign in** in the Square account form. Successful authorization opens the amount keypad. A failed sign-in shows an error in the form. Use **Account** to sign out or change credentials. Changing application ID requires closing and reopening the app; seller/token/location changes under the same application ID sign out before signing in again.
 
 ## 7. Pair a reader
 Depending on what environment you are authorized in, the steps for pairing a reader will differ. Follow the steps below according to your current environment.
@@ -75,22 +75,13 @@ To pair a reader:
 5. The reader is ready to be used for payments once the state updates to `Ready`.
 
 ### Sandbox
-In a sandbox environment, you are only able to add mock readers utilizing the `MockReaderUI` framework. The `MockReaderUI` framework is provided as a part of this repo and has already been added to the DonutCounter app. Please note that MockReaderUI is to only be used in debug builds of your application, not in a production application.
-
-To pair a mock reader:
-1. Once the SDK has been authorized in sandbox, navigate back to the main home view of the app.
-2. On the bottom of the main donut counter app view, tap the button `Show Mock Reader`
-3. A reader shaped button should appear on the screen. This button can be placed anywhere on the screen by holding down the button and dragging around the screen.
-4. Tapping on the button should reveal a menu to add a mock magstripe or contactless & chip reader.
-5. Tap on the reader type you'd like to connect. You can verify the mock reader has been added correctly in the Settings screen.
-
-<img src="../Images/donut-counter-home-mock-reader.png" width="250"/>
+Sandbox accepts sandbox credentials and supports online-only processing. This lab build does not link MockReaderUI, so it does not expose mock-reader controls. A developer can add the separate MockReaderUI product to a debug-only target when mock-reader payment testing is needed; never include it in a distributed release.
 
 ## 8. Take a Payment
 
 To process a payment, follow these steps:
 
-1. On the main screen of the application, tap the "Buy for $1" button. This action will present the default payment prompt screen provided by the SDK.
+1. Select a currency matching the authorized location, enter an amount, and tap **Charge**. Changing currency clears the amount. The app then presents the SDK payment prompt.
 
 2. Depending on your environment:
    - **Production Environment**: Use your paired Square reader to tap, insert, or swipe a payment card.

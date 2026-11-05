@@ -1,7 +1,6 @@
 import AVFoundation
 import CoreBluetooth
 import CoreLocation
-import SquareMobilePaymentsSDK
 import SwiftUI
 
 @Observable class PermissionsViewModel: NSObject {
@@ -9,22 +8,15 @@ import SwiftUI
     var isBluetoothPermissionGranted: Bool = false
     var isLocationPermissionGranted: Bool = false
     var isMicrophonePermissionGranted: Bool = false
-    var isLoading: Bool = false
-    var authorizationFailed: Bool = false
-    var authorizationState: AuthorizationState
+    var allPermissionsGranted: Bool {
+        isBluetoothPermissionGranted && isLocationPermissionGranted && isMicrophonePermissionGranted
+    }
 
     @ObservationIgnored private var bluetoothManager: CBCentralManager?
     @ObservationIgnored private var locationManager: CLLocationManager = CLLocationManager()
     
-    let mobilePaymentsSDK: SDKManager
-    
-    init(mobilePaymentsSDK: SDKManager) {
-        self.mobilePaymentsSDK = mobilePaymentsSDK
-        self.authorizationState = mobilePaymentsSDK.authorizationManager.state
+    override init() {
         super.init()
-        
-        mobilePaymentsSDK.authorizationManager.add(self)
-        refreshAuthorizationState()
         
         locationManager.delegate = self
         refreshAllPermissionsStatus()
@@ -39,7 +31,7 @@ import SwiftUI
         case .denied, .restricted:
             openAppSettings()
         case .allowedAlways:
-            print("Bluetooth has already been authorized.")
+            refreshBluetoothPermissionStatus()
         @unknown default:
             fatalError("Invalid Bluetooth permission status")
         }
@@ -52,7 +44,7 @@ import SwiftUI
         case .restricted, .denied:
             openAppSettings()
         case .authorizedAlways, .authorizedWhenInUse:
-            print("Location services have already been authorized.")
+            refreshLocationManagerStatus()
         @unknown default:
             fatalError("Invalid location permission status")
         }
@@ -62,7 +54,7 @@ import SwiftUI
         switch AVAudioApplication.shared.recordPermission {
         case .undetermined:
             AVCaptureDevice.requestAccess(for: .audio) { [weak self] _ in
-                self?.refreshMicrophonePermission()
+                Task { @MainActor [weak self] in self?.refreshMicrophonePermission() }
             }
         case .denied:
             self.openAppSettings()
@@ -73,7 +65,7 @@ import SwiftUI
     
     // MARK: - Private Methods
     
-    private func refreshAllPermissionsStatus() {
+    func refreshAllPermissionsStatus() {
         refreshBluetoothPermissionStatus()
         refreshLocationManagerStatus()
         refreshMicrophonePermission()
@@ -116,13 +108,6 @@ import SwiftUI
         }
     }
     
-    private func refreshAuthorizationState() {
-        authorizationState = mobilePaymentsSDK.authorizationManager.state
-    }
-    
-    deinit {
-        mobilePaymentsSDK.authorizationManager.remove(self)
-    }
 }
 
 // MARK: - CBCentralManagerDelegate
@@ -137,13 +122,5 @@ extension PermissionsViewModel: CBCentralManagerDelegate {
 extension PermissionsViewModel: CLLocationManagerDelegate {
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         refreshLocationManagerStatus()
-    }
-}
-
-// MARK: - AuthorizationStateObserver
-
-extension PermissionsViewModel: AuthorizationStateObserver {
-    func authorizationStateDidChange(_ authorizationState: AuthorizationState) {
-        refreshAuthorizationState()
     }
 }

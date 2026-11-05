@@ -65,4 +65,24 @@ struct MoneyAmountEntryTests {
         #expect(amount.payableAmount == 59)
         #expect(amount.text == "59")
     }
+
+    @Test func `Yen has no fractional units in a US locale`() {
+        var amount = MoneyAmountEntry(currencyCode: "JPY", locale: Locale(identifier: "en_US"))
+        amount.appendDigit(5)
+        amount.appendDecimalSeparator()
+        amount.appendDigit(9)
+        #expect(amount.payableAmount == 59)
+        #expect(!amount.allowsFractionalAmount)
+    }
+
+    @Test(arguments: ["AUD", "CAD", "EUR", "GBP", "USD"])
+    func `Decimal currencies preserve exact minor units in a Japanese locale`(code: String) {
+        var amount = MoneyAmountEntry(currencyCode: code, locale: Locale(identifier: "ja_JP"))
+        amount.appendDigit(5)
+        amount.appendDecimalSeparator()
+        amount.appendDigit(2)
+        amount.appendDigit(9)
+        #expect(amount.payableAmount == 529)
+        #expect(amount.allowsFractionalAmount)
+    }
 }

@@ -16,6 +16,8 @@ struct MoneyAmountEntry {
         return value
     }
 
+    var allowsFractionalAmount: Bool { fractionDigits > 0 }
+
     var formattedAmount: String {
         let value = Decimal(minorUnits(in: text) ?? 0) / Decimal(scale)
         return formatter.string(from: NSDecimalNumber(decimal: value)) ?? currencyCode
